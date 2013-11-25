@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.0
 // Machine:  HPNOTEB
-// DateTime: 25/11/2013 18:06:22
+// DateTime: 25/11/2013 23:24:47
 // UserName: Simone
-// Input file <C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23>
+// Input file <C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23>
 
 // options: lines report gplex
 
@@ -28,47 +28,47 @@ public enum Tokens {error=126,
     TAKE=163,TRUE=164,TUNNELOF=165,VOID=166,WHILE=167};
 
 public struct ValueType
-#line 3 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 3 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 {
-#line 4 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 4 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal int intValue;
-#line 5 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 5 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal string identifier;
-#line 6 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 6 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Client> clients;
-#line 7 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 7 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Client client;
-#line 8 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 8 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Tunnel> tunnels;
-#line 9 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 9 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Tunnel tunnel;
-#line 10 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 10 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Server server;
-#line 11 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 11 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Group> groups;
-#line 12 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 12 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Group group;
-#line 13 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 13 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Typed typed;
-#line 14 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 14 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal SmclType type;
-#line 15 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 15 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Function> functions;
-#line 16 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 16 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Function function;
-#line 17 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 17 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Typed> paramts;
-#line 18 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 18 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Stmt> stmts;
-#line 19 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 19 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Stmt stmt;
-#line 20 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 20 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Exp exp;
-#line 21 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 21 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Exp> args;
-#line 22 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 22 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal List<Id> ids;
-#line 23 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 23 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 }
 // Abstract base class for GPLEX scanners
 public abstract class ScanBase : AbstractScanner<ValueType,LexLocation> {
@@ -89,10 +89,10 @@ public class ScanObj {
 
 public class Parser: ShiftReduceParser<ValueType, LexLocation>
 {
-  // Verbatim content from C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
-#line 58 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+  // Verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
+#line 58 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Prog Prog;
-  // End verbatim content from C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
+  // End verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
 
 #pragma warning disable 649
   private static Dictionary<int, string> aliasses;
@@ -348,279 +348,279 @@ public class Parser: ShiftReduceParser<ValueType, LexLocation>
     switch (action)
     {
       case 2: // prog -> clients, server
-#line 62 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 62 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { this.Prog = new Prog(ValueStack[ValueStack.Depth-2].clients, ValueStack[ValueStack.Depth-1].server); }
         break;
       case 3: // clients -> /* empty */
-#line 65 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 65 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.clients = new List<Client>(); }
         break;
       case 4: // clients -> clients, client
-#line 66 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 66 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].clients.Add(ValueStack[ValueStack.Depth-1].client); CurrentSemanticValue.clients=ValueStack[ValueStack.Depth-2].clients; }
         break;
       case 5: // client -> DECLARE, CLIENT, ID, ':', tunnels, functions
-#line 69 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 69 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.client = new Client(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].tunnels, ValueStack[ValueStack.Depth-1].functions); }
         break;
       case 6: // server -> DECLARE, SERVER, ID, ':', groups, functions
-#line 72 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 72 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.server = new Server(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].groups, ValueStack[ValueStack.Depth-1].functions); }
         break;
       case 7: // groups -> /* empty */
-#line 75 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 75 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.groups = new List<Group>(); }
         break;
       case 8: // groups -> groups, group
-#line 76 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 76 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].groups.Add(ValueStack[ValueStack.Depth-1].group); CurrentSemanticValue.groups = ValueStack[ValueStack.Depth-2].groups; }
         break;
       case 9: // group -> GROUPOF, ID, ID, ';'
-#line 79 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 79 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.group = new Group(ValueStack[ValueStack.Depth-3].identifier, new Id(ValueStack[ValueStack.Depth-2].identifier)); }
         break;
       case 10: // tunnels -> /* empty */
-#line 82 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 82 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.tunnels = new List<Tunnel>(); }
         break;
       case 11: // tunnels -> tunnels, tunnel
-#line 83 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 83 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].tunnels.Add(ValueStack[ValueStack.Depth-1].tunnel); CurrentSemanticValue.tunnels = ValueStack[ValueStack.Depth-2].tunnels; }
         break;
       case 12: // tunnel -> TUNNELOF, typed, ';'
-#line 86 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 86 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.tunnel = new Tunnel(ValueStack[ValueStack.Depth-2].typed); }
         break;
       case 13: // typed -> type, ID
-#line 89 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 89 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.typed = new Typed(ValueStack[ValueStack.Depth-2].type, new Id(ValueStack[ValueStack.Depth-1].identifier)); }
         break;
       case 14: // type -> INT
-#line 92 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 92 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new IntType(); }
         break;
       case 15: // type -> SINT
-#line 93 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 93 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SintType(); }
         break;
       case 16: // type -> BOOL
-#line 94 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 94 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new BoolType(); }
         break;
       case 17: // type -> SBOOL
-#line 95 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 95 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SboolType(); }
         break;
       case 18: // type -> VOID
-#line 96 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 96 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new VoidType(); }
         break;
       case 19: // type -> CLIENT
-#line 97 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 97 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new ClientType(); }
         break;
       case 20: // type -> SCLIENT
-#line 98 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 98 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SclientType(); }
         break;
       case 21: // functions -> /* empty */
-#line 102 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 102 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.functions = new List<Function>(); }
         break;
       case 22: // functions -> functions, function
-#line 103 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 103 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].functions.Add(ValueStack[ValueStack.Depth-1].function); CurrentSemanticValue.functions = ValueStack[ValueStack.Depth-2].functions; }
         break;
       case 23: // function -> FUNCTION, type, ID, '(', paramts, ')', '{', stmts, '}'
-#line 106 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 106 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.function = new Function(ValueStack[ValueStack.Depth-8].type, ValueStack[ValueStack.Depth-7].identifier, ValueStack[ValueStack.Depth-5].paramts, ValueStack[ValueStack.Depth-2].stmts); }
         break;
       case 24: // paramts -> /* empty */
-#line 109 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 109 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = new List<Typed>(); }
         break;
       case 25: // paramts -> nparamts
-#line 110 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 110 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = ValueStack[ValueStack.Depth-1].paramts; }
         break;
       case 26: // nparamts -> typed
-#line 113 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 113 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = new List<Typed>(); CurrentSemanticValue.paramts.Add(ValueStack[ValueStack.Depth-1].typed); }
         break;
       case 27: // nparamts -> nparamts, ',', typed
-#line 114 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 114 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].paramts.Add(ValueStack[ValueStack.Depth-1].typed); CurrentSemanticValue.paramts = ValueStack[ValueStack.Depth-3].paramts; }
         break;
       case 28: // stmts -> /* empty */
-#line 117 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 117 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmts = new List<Stmt>(); }
         break;
       case 29: // stmts -> stmts, stmt
-#line 118 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 118 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].stmts.Add(ValueStack[ValueStack.Depth-1].stmt); CurrentSemanticValue.stmts = ValueStack[ValueStack.Depth-2].stmts; }
         break;
       case 30: // stmt -> type, ID, '=', exp, ';'
-#line 121 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 121 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Declaration(new Typed(ValueStack[ValueStack.Depth-5].type, new Id(ValueStack[ValueStack.Depth-4].identifier)), new Assignment( new Id(ValueStack[ValueStack.Depth-4].identifier), ValueStack[ValueStack.Depth-2].exp));}
         break;
       case 31: // stmt -> ID, '=', exp, ';'
-#line 122 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 122 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Assignment( new Id(ValueStack[ValueStack.Depth-4].identifier), ValueStack[ValueStack.Depth-2].exp);}
         break;
       case 32: // stmt -> '{', stmts, '}'
-#line 123 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 123 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Block(ValueStack[ValueStack.Depth-2].stmts); }
         break;
       case 33: // stmt -> IF, '(', exp, ')', stmt
-#line 124 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 124 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new If(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>())); }
         break;
       case 34: // stmt -> ELSE, stmt
-#line 125 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 125 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Else(ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>())); }
         break;
       case 35: // stmt -> WHILE, '(', exp, ')', stmt
-#line 126 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 126 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 {CurrentSemanticValue.stmt = new While(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>()));}
         break;
       case 36: // stmt -> FOR, '(', typed, IN, ID, ')', stmt
-#line 127 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 127 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 {CurrentSemanticValue.stmt = new For(ValueStack[ValueStack.Depth-5].typed, new Id(ValueStack[ValueStack.Depth-3].identifier), ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>()));}
         break;
       case 37: // stmt -> typed, ';'
-#line 128 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 128 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Declaration(ValueStack[ValueStack.Depth-2].typed);}
         break;
       case 38: // stmt -> DISPLAY, '(', exp, ')', ';'
-#line 129 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 129 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Display(ValueStack[ValueStack.Depth-3].exp); }
         break;
       case 39: // stmt -> exp, ';'
-#line 130 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 130 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new ExpStmt(ValueStack[ValueStack.Depth-2].exp);}
         break;
       case 40: // stmt -> RETURN, exp, ';'
-#line 131 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 131 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Return(ValueStack[ValueStack.Depth-2].exp); }
         break;
       case 41: // stmt -> RETURN, ';'
-#line 132 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 132 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Return(null); }
         break;
       case 42: // exp -> NUM
-#line 136 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 136 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new IntLiteral(ValueStack[ValueStack.Depth-1].intValue); }
         break;
       case 43: // exp -> exp, AND, exp
-#line 137 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 137 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new And(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 44: // exp -> exp, OR, exp
-#line 138 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 138 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Or(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 45: // exp -> exp, EQUAL, exp
-#line 139 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 139 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Equal(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 46: // exp -> exp, LESS_THAN, exp
-#line 140 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 140 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new LessThan(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 47: // exp -> exp, GREATER_THAN, exp
-#line 141 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 141 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new GreaterThan(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 48: // exp -> TRUE
-#line 142 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 142 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new BoolLiteral(true); }
         break;
       case 49: // exp -> FALSE
-#line 143 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 143 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new BoolLiteral(false); }
         break;
       case 50: // exp -> exp, '+', exp
-#line 144 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 144 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Sum(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 51: // exp -> exp, '-', exp
-#line 145 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 145 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Subtraction(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 52: // exp -> exp, '*', exp
-#line 146 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 146 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Product(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 53: // exp -> exp, '/', exp
-#line 147 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 147 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Division(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 54: // exp -> exp, '%', exp
-#line 148 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 148 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Module(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 55: // exp -> NOT, exp
-#line 149 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 149 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Not(ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 56: // exp -> IDDOT, PUT, '(', exp, ')'
-#line 150 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 150 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Put(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
         break;
       case 57: // exp -> IDDOT, GET, '(', exp, ')'
-#line 151 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 151 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Get(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
         break;
       case 58: // exp -> IDDOT, TAKE, '(', exp, ')'
-#line 152 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 152 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Take(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
         break;
       case 59: // exp -> IDDOT, ID, '(', args, ')'
-#line 153 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 153 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new MethodInvocation(new Id(ValueStack[ValueStack.Depth-5].identifier), new FunctionCall(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].args)); }
         break;
       case 60: // exp -> ID, '(', args, ')'
-#line 154 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 154 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new FunctionCall(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].args); }
         break;
       case 61: // exp -> ID
-#line 155 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 155 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Id(ValueStack[ValueStack.Depth-1].identifier); }
         break;
       case 62: // exp -> SSTRING
-#line 156 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 156 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new SString(ValueStack[ValueStack.Depth-1].identifier); }
         break;
       case 63: // exp -> READINT
-#line 157 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 157 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new ReadInt(); }
         break;
       case 64: // exp -> OPEN, '(', exp, '|', ids, ')'
-#line 158 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 158 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Open(ValueStack[ValueStack.Depth-4].exp, ValueStack[ValueStack.Depth-2].ids); }
         break;
       case 65: // ids -> ID
-#line 161 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 161 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.ids = new List<Id>(); CurrentSemanticValue.ids.Add(new Id(ValueStack[ValueStack.Depth-1].identifier)); }
         break;
       case 66: // ids -> ids, ',', ID
-#line 162 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 162 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].ids.Add(new Id(ValueStack[ValueStack.Depth-1].identifier)); CurrentSemanticValue.ids = ValueStack[ValueStack.Depth-3].ids; }
         break;
       case 67: // args -> /* empty */
-#line 165 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 165 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = new List<Exp>(); }
         break;
       case 68: // args -> nargs
-#line 166 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 166 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = ValueStack[ValueStack.Depth-1].args; }
         break;
       case 69: // nargs -> exp
-#line 169 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 169 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = new List<Exp>(); CurrentSemanticValue.args.Add(ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 70: // nargs -> nargs, ',', exp
-#line 170 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 170 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].args.Add(ValueStack[ValueStack.Depth-1].exp); CurrentSemanticValue.args = ValueStack[ValueStack.Depth-3].args; }
         break;
     }
@@ -637,7 +637,7 @@ public class Parser: ShiftReduceParser<ValueType, LexLocation>
         return CharToString((char)terminal);
   }
 
-#line 174 "C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 174 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	public Parser(Scanner s) : base(s) {}
 }
 }

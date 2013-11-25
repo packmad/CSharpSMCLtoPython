@@ -11,6 +11,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
     {
         internal SmclType SmclType { get; set; }
 
+
         public abstract void Accept(ITreeNodeVisitor visitor);
 
         protected TreeNode()
