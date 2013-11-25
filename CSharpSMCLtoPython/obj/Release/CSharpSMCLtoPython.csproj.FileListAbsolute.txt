@@ -1,0 +1,1 @@
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\bin\Release\CSharpSMCLtoPython.exe.config

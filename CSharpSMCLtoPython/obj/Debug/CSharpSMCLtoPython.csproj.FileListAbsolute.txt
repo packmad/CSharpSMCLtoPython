@@ -1,0 +1,6 @@
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\obj\Debug\CSharpSMCLtoPython.csprojResolveAssemblyReference.cache
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\bin\Debug\CSharpSMCLtoPython.exe.config
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\bin\Debug\CSharpSMCLtoPython.exe
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\bin\Debug\CSharpSMCLtoPython.pdb
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\obj\Debug\CSharpSMCLtoPython.exe
+C:\Users\Simone\Documents\Visual Studio 2012\Projects\CSharpSMCLtoPython\CSharpSMCLtoPython\obj\Debug\CSharpSMCLtoPython.pdb

@@ -1,0 +1,39 @@
+﻿declare client Millionaires :
+	tunnel of sint netWorth;
+
+	function void main(int[] args) {
+		ask();
+	}
+
+	function void ask() {
+		netWorth.put(readInt());
+	}
+
+	function void tell(bool b) {
+		if (b) {
+			display("You are the richest!");
+		}
+		else {
+			display("Make more money!");
+		}
+	}
+
+declare server Max :
+	group of Millionaires mills;
+
+	function void main(int[] args) {
+		sint max = 0;
+		sclient rich;
+
+		for (client c in mills) {
+			sint netWorth = c.netWorth.get();
+			if (netWorth > max) {
+				max = netWorth;
+				rich = c;
+			}
+		}
+
+		for (client c in mills) {
+			c.tell(open(c==rich|rich));
+		}
+	}
