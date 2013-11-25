@@ -62,7 +62,7 @@ namespace CSharpSMCLtoPython.Visitors
             Function = fun;
         }
 
-        public SmclType GetMyTypeFromId(string id)
+        public SmclType GetTypeFromId(string id)
         {
             if (SymbolTable.ContainsKey(id))
                 return SymbolTable[id];
@@ -168,7 +168,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public SmclType GetMyTypeFromId(string idName)
         {
-            return TmpPartEnv.Functions[TmpFunName].GetMyTypeFromId(idName);
+            return TmpPartEnv.Functions[TmpFunName].GetTypeFromId(idName);
         }
 
         public void AddSymbolInFunction(string id, SmclType type)
@@ -309,27 +309,27 @@ namespace CSharpSMCLtoPython.Visitors
         private void ResultIsSintAndBothOperandsMustBeSintOrSubtype(BinaryOp binaryOp)
         {
             binaryOp.Left.Accept(this);
-            MustBeSintOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression (" + binaryOp + ") must be integer");
+            MustBeSintOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression\n (" + binaryOp + ")\n must be integer but is a " + binaryOp.Left.SmclType);
             binaryOp.Right.Accept(this);
-            MustBeSintOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression (" + binaryOp + ") must be integer");
+            MustBeSintOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression\n (" + binaryOp + ")\n must be integer but is a " + binaryOp.Right.SmclType);
             binaryOp.SmclType = IntType;
         }
 
         private void ResultIsSboolAndBothOperandsMustBeSboolOrSubtype(BinaryOp binaryOp)
         {
             binaryOp.Left.Accept(this);
-            MustBeSboolOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression (" + binaryOp + ") must be bool");
+            MustBeSboolOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression\n (" + binaryOp + ")\n must be bool but is a " + binaryOp.Left.SmclType);
             binaryOp.Right.Accept(this);
-            MustBeSboolOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression (" + binaryOp + ") must be bool");
+            MustBeSboolOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression\n (" + binaryOp + ")\n must be bool but is a " + binaryOp.Right.SmclType);
             binaryOp.SmclType = BoolType;
         }
 
         private void ResultIsSboolAndBothOperandsMustBeSintOrSubtype(BinaryOp binaryOp)
         {
             binaryOp.Left.Accept(this);
-            MustBeSintOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression (" + binaryOp + ") must be integer");
+            MustBeSintOrSubtype(binaryOp.Left.SmclType, "The type of the left operand in the expression\n (" + binaryOp + ")\n must be integer but is a " + binaryOp.Left.SmclType);
             binaryOp.Right.Accept(this);
-            MustBeSintOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression (" + binaryOp + ") must be integer");
+            MustBeSintOrSubtype(binaryOp.Right.SmclType, "The type of the right operand in the expression\n (" + binaryOp + ")\n must be integer but is a " + binaryOp.Right.SmclType);
             binaryOp.SmclType = BoolType;
         }
 
@@ -371,7 +371,7 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Not not)
         {
             not.Operand.Accept(this);
-            MustBeSboolOrSubtype(not.Operand.SmclType, string.Format("The operand in the expression ({0} must be bool", not));
+            MustBeSboolOrSubtype(not.Operand.SmclType, string.Format("The operand in the expression\n ({0} must be bool", not));
             not.SmclType = BoolType;
         }
 

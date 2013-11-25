@@ -115,7 +115,8 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
         public override bool Equals(object obj)
         {
-            return typeof(IntType).IsAssignableFrom(typeof(SintType));
+
+            return obj.GetType() == typeof (IntType) || obj.GetType() == typeof (SintType);
         }
 
         public override int GetHashCode()
@@ -178,7 +179,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
         public override bool Equals(object obj)
         {
-            return typeof(BoolType).IsAssignableFrom(typeof(SboolType));
+            return obj.GetType() == typeof(BoolType) || obj.GetType() == typeof(SboolType);
         }
 
         public override int GetHashCode()
@@ -305,7 +306,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
         public override bool Equals(object obj)
         {
-            return typeof(ClientType).IsAssignableFrom(typeof(SclientType));
+            return obj.GetType() == typeof(SclientType) || obj.GetType() == typeof(ClientType);
         }
 
         public override int GetHashCode()
