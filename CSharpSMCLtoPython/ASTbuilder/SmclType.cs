@@ -330,11 +330,17 @@ namespace CSharpSMCLtoPython.ASTbuilder
     {
         public override sealed SmclT SmclT { get; protected set; }
         public override sealed string Name { get; protected set; }
+        public SmclType Tunneled { get; private set; }
 
         public TunnelType()
         {
             SmclT = SmclT.TunnelT;
             Name = "tunnel";
+        }
+
+        public TunnelType(SmclType tunneled) : this()
+        {
+            Tunneled = tunneled;
         }
 
         public override bool Equals(object obj)
