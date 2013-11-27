@@ -64,7 +64,7 @@ namespace CSharpSMCLtoPython.Visitors
         {
             if (SymbolTable.ContainsKey(id))
                 return SymbolTable[id];
-            return new NoneType();
+            throw new TypeCheckingException("'"+id + "' is never defined.");
         }
 
         public SmclType GetReturn()
@@ -79,7 +79,7 @@ namespace CSharpSMCLtoPython.Visitors
         public string PartName { get; private set; }
         public Dictionary<string, FuncEnv> Functions = new Dictionary<string, FuncEnv>();
         public Dictionary<string, SmclType> Tunnels;
-        public Dictionary<string, PartEnv> Groups;
+        public Dictionary<string, PartEnv> Groups; // e.g. mills -> Millionaries
 
         public readonly Multipart Mp;
 
@@ -143,7 +143,7 @@ namespace CSharpSMCLtoPython.Visitors
         public PartEnv Server { get; set; }
 
         public PartEnv TmpPartEnv { get; set; }
-        public PartEnv InvokingOn { get; set; }
+        public PartEnv InvokingOn { get; set; } // used for method invocation
         public string TmpFunName { get; set; }
 
         public void Add(Client c)
@@ -696,7 +696,8 @@ namespace CSharpSMCLtoPython.Visitors
             
             foreach (var id in open.Args)
             {
-                SmclType tmpt = _env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name];
+                SmclType tmpt = _env.GetMyTypeFromId(id.Name); //_env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name];
+
                 if (! tmpt.IsSecret())
                     throw new TypeCheckingException("open only on secret variables");
                 tmpt = ConvertToPublic(tmpt);
@@ -715,7 +716,7 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(MethodInvocation mi)
         {
             if (!_env.IsVisitingServer())
-                throw new TypeCheckingException("FunctionCallyou can invoke methods only from a Server instance.");
+                throw new TypeCheckingException("you can invoke methods only from a Server instance.");
             if (_env.TmpPartEnv.Functions[_env.TmpFunName].IdToClient.ContainsKey(mi.Id.Name))
             {
                 _env.InvokingOn = _env.TmpPartEnv.Functions[_env.TmpFunName].IdToClient[mi.Id.Name];
