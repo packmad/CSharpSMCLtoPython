@@ -24,14 +24,14 @@ namespace CSharpSMCLtoPython {
                     var toStringVisitor = new ToStringVisitor();
                     parsedProgram.Accept(toStringVisitor);
 
-                    Console.WriteLine("TYPE-CHECKED PROG:\n{0}\n", toStringVisitor.Result);
+                    Console.WriteLine("TYPE-CHECKED PROG:\n\n{0}\n", toStringVisitor.Result);
                     /*
                     var pyGen = new GenerateLlvmVisitor();
-                    parsedProgram.Accept(codeGen);
-                    Console.WriteLine("PYTHON CODE:\n{0}\n", codeGen.Result);
+                    parsedProgram.Accept(pyGen);
+                    Console.WriteLine("PYTHON CODE:\n{0}\n", pyGen.Result);
                     try {
-                        using (var sw = File.CreateText(@"test.ll"))
-                            sw.Write(codeGen.Result);
+                        using (var sw = File.CreateText(@"pyGen.py"))
+                            sw.Write(pyGen.Result);
                     } catch (Exception e) {
                         Console.WriteLine("Cannot write output file; reason={0}", e.Message);
                     }
