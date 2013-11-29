@@ -5,6 +5,7 @@
 	internal string identifier;
 	internal List<Client> clients;
 	internal Client client;
+	internal TunMethod tunMethod;
 	internal List<Tunnel> tunnels;
 	internal Tunnel tunnel;
 	internal Server server;
@@ -48,6 +49,7 @@
 %type <server> server
 %type <stmts> stmts
 %type <stmt> stmt
+%type <tunMethod> tunMethod
 %type <tunnel> tunnel
 %type <tunnels> tunnels
 %type <typed> typed
@@ -147,15 +149,20 @@ exp: NUM  { $$ = new IntLiteral($1); }
 	| exp '/' exp { $$ = new Division($1, $3); }
 	| exp '%' exp { $$ = new Module($1, $3); }
 	| NOT exp { $$ = new Not($2); }
-	| IDDOT PUT '('exp')' { $$ = new Put(new Id($1), $4); }
-	| IDDOT GET '('exp')' { $$ = new Get(new Id($1), $4); }
-	| IDDOT TAKE '('exp')' { $$ = new Take(new Id($1), $4); }
+	| IDDOT tunMethod { $$ = new TunMethodCall(new Id($1), $2); }
 	| IDDOT ID '(' args ')' { $$ = new MethodInvocation(new Id($1), new FunctionCall($2, $4)); }
+	| IDDOT IDDOT tunMethod { $$ = new DotClient(new Id($1), new TunMethodCall(new Id($2), $3)); }
 	| ID '(' args ')' { $$ = new FunctionCall($1, $3); }
 	| ID { $$ = new Id($1); }
 	| SSTRING { $$ = new SString($1); }
 	| READINT { $$ = new ReadInt(); }
 	| OPEN '(' exp '|' ids ')' { $$ = new Open($3, $5); }
+	;
+
+tunMethod:
+	| PUT '('exp')' { $$ = new Put($3); }
+	| GET "()" { $$ = new Get(); }
+	| TAKE "()" { $$ = new Take(); }
 	;
 
 ids: ID { $$ = new List<Id>(); $$.Add(new Id($1)); }

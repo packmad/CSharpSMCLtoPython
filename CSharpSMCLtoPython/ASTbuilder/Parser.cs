@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.0
 // Machine:  HPNOTEB
-// DateTime: 27/11/2013 18:30:58
+// DateTime: 29/11/2013 16:14:59
 // UserName: Simone
-// Input file <C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23>
+// Input file <C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 29/11/2013 16:14:57>
 
 // options: lines report gplex
 
@@ -39,36 +39,38 @@ public struct ValueType
 #line 7 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Client client;
 #line 8 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Tunnel> tunnels;
+	internal TunMethod tunMethod;
 #line 9 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Tunnel tunnel;
+	internal List<Tunnel> tunnels;
 #line 10 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Server server;
+	internal Tunnel tunnel;
 #line 11 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Group> groups;
+	internal Server server;
 #line 12 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Group group;
+	internal List<Group> groups;
 #line 13 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Typed typed;
+	internal Group group;
 #line 14 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal SmclType type;
+	internal Typed typed;
 #line 15 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Function> functions;
+	internal SmclType type;
 #line 16 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Function function;
+	internal List<Function> functions;
 #line 17 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Typed> paramts;
+	internal Function function;
 #line 18 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Stmt> stmts;
+	internal List<Typed> paramts;
 #line 19 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Stmt stmt;
+	internal List<Stmt> stmts;
 #line 20 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal Exp exp;
+	internal Stmt stmt;
 #line 21 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Exp> args;
+	internal Exp exp;
 #line 22 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-	internal List<Id> ids;
+	internal List<Exp> args;
 #line 23 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+	internal List<Id> ids;
+#line 24 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 }
 // Abstract base class for GPLEX scanners
 public abstract class ScanBase : AbstractScanner<ValueType,LexLocation> {
@@ -89,217 +91,218 @@ public class ScanObj {
 
 public class Parser: ShiftReduceParser<ValueType, LexLocation>
 {
-  // Verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
-#line 58 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+  // Verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 29/11/2013 16:14:57
+#line 60 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	internal Prog Prog;
-  // End verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 25/11/2013 15:01:23
+  // End verbatim content from C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y - 29/11/2013 16:14:57
 
 #pragma warning disable 649
   private static Dictionary<int, string> aliasses;
 #pragma warning restore 649
-  private static Rule[] rules = new Rule[71];
-  private static State[] states = new State[155];
+  private static Rule[] rules = new Rule[74];
+  private static State[] states = new State[156];
   private static string[] nonTerms = new string[] {
       "args", "nargs", "clients", "client", "exp", "functions", "function", "group", 
-      "groups", "ids", "paramts", "nparamts", "server", "stmts", "stmt", "tunnel", 
-      "tunnels", "typed", "type", "prog", "$accept", };
+      "groups", "ids", "paramts", "nparamts", "server", "stmts", "stmt", "tunMethod", 
+      "tunnel", "tunnels", "typed", "type", "prog", "$accept", };
 
   static Parser() {
-    states[0] = new State(-3,new int[]{-20,1,-3,3});
+    states[0] = new State(-3,new int[]{-21,1,-3,3});
     states[1] = new State(new int[]{127,2});
     states[2] = new State(-1);
     states[3] = new State(new int[]{135,6},new int[]{-13,4,-4,5});
     states[4] = new State(-2);
     states[5] = new State(-4);
-    states[6] = new State(new int[]{160,7,134,146});
+    states[6] = new State(new int[]{160,7,134,147});
     states[7] = new State(new int[]{129,8});
     states[8] = new State(new int[]{58,9});
     states[9] = new State(-7,new int[]{-9,10});
-    states[10] = new State(new int[]{145,142,141,-21,127,-21},new int[]{-6,11,-8,141});
+    states[10] = new State(new int[]{145,143,141,-21,127,-21},new int[]{-6,11,-8,142});
     states[11] = new State(new int[]{141,13,127,-6},new int[]{-7,12});
     states[12] = new State(-22);
-    states[13] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95},new int[]{-19,14});
+    states[13] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96},new int[]{-20,14});
     states[14] = new State(new int[]{129,15});
     states[15] = new State(new int[]{40,16});
-    states[16] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95,41,-24},new int[]{-11,17,-12,137,-18,140,-19,135});
+    states[16] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96,41,-24},new int[]{-11,17,-12,138,-19,141,-20,136});
     states[17] = new State(new int[]{41,18});
     states[18] = new State(new int[]{123,19});
     states[19] = new State(-28,new int[]{-14,20});
-    states[20] = new State(new int[]{125,21,148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,22,-19,23,-18,122,-5,129});
+    states[20] = new State(new int[]{125,21,148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,22,-20,23,-19,123,-5,130});
     states[21] = new State(-23);
     states[22] = new State(-29);
     states[23] = new State(new int[]{129,24});
     states[24] = new State(new int[]{61,25,59,-13});
-    states[25] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,26});
+    states[25] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,26});
     states[26] = new State(new int[]{59,27,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
     states[27] = new State(-30);
-    states[28] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,29});
-    states[29] = new State(new int[]{132,-43,155,-43,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-43,41,-43,44,-43,124,-43});
-    states[30] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,31});
-    states[31] = new State(new int[]{132,28,155,-44,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-44,41,-44,44,-44,124,-44});
-    states[32] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,33});
-    states[33] = new State(new int[]{132,-45,155,-45,138,-45,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-45,41,-45,44,-45,124,-45});
-    states[34] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,35});
-    states[35] = new State(new int[]{132,-46,155,-46,138,-46,149,-46,144,-46,43,38,45,40,42,42,47,44,37,46,59,-46,41,-46,44,-46,124,-46});
-    states[36] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,37});
-    states[37] = new State(new int[]{132,-47,155,-47,138,-47,149,-47,144,-47,43,38,45,40,42,42,47,44,37,46,59,-47,41,-47,44,-47,124,-47});
-    states[38] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,39});
-    states[39] = new State(new int[]{132,-50,155,-50,138,-50,149,-50,144,-50,43,-50,45,-50,42,42,47,44,37,46,59,-50,41,-50,44,-50,124,-50});
-    states[40] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,41});
-    states[41] = new State(new int[]{132,-51,155,-51,138,-51,149,-51,144,-51,43,-51,45,-51,42,42,47,44,37,46,59,-51,41,-51,44,-51,124,-51});
-    states[42] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,43});
+    states[28] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,29});
+    states[29] = new State(new int[]{132,-43,155,-43,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-43,44,-43,41,-43,124,-43});
+    states[30] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,31});
+    states[31] = new State(new int[]{132,28,155,-44,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-44,44,-44,41,-44,124,-44});
+    states[32] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,33});
+    states[33] = new State(new int[]{132,-45,155,-45,138,-45,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-45,44,-45,41,-45,124,-45});
+    states[34] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,35});
+    states[35] = new State(new int[]{132,-46,155,-46,138,-46,149,-46,144,-46,43,38,45,40,42,42,47,44,37,46,59,-46,44,-46,41,-46,124,-46});
+    states[36] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,37});
+    states[37] = new State(new int[]{132,-47,155,-47,138,-47,149,-47,144,-47,43,38,45,40,42,42,47,44,37,46,59,-47,44,-47,41,-47,124,-47});
+    states[38] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,39});
+    states[39] = new State(new int[]{132,-50,155,-50,138,-50,149,-50,144,-50,43,-50,45,-50,42,42,47,44,37,46,59,-50,44,-50,41,-50,124,-50});
+    states[40] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,41});
+    states[41] = new State(new int[]{132,-51,155,-51,138,-51,149,-51,144,-51,43,-51,45,-51,42,42,47,44,37,46,59,-51,44,-51,41,-51,124,-51});
+    states[42] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,43});
     states[43] = new State(-52);
-    states[44] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,45});
+    states[44] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,45});
     states[45] = new State(-53);
-    states[46] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,47});
+    states[46] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,47});
     states[47] = new State(-54);
     states[48] = new State(-42);
     states[49] = new State(-48);
     states[50] = new State(-49);
-    states[51] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,52});
-    states[52] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-55,41,-55,44,-55,124,-55});
-    states[53] = new State(new int[]{156,54,143,77,163,81,129,85});
-    states[54] = new State(new int[]{40,55});
-    states[55] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,56});
-    states[56] = new State(new int[]{41,57,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[57] = new State(-56);
-    states[58] = new State(new int[]{40,59,59,-61,132,-61,155,-61,138,-61,149,-61,144,-61,43,-61,45,-61,42,-61,47,-61,37,-61,41,-61,44,-61,124,-61});
-    states[59] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67,41,-67},new int[]{-1,60,-2,62,-5,76});
-    states[60] = new State(new int[]{41,61});
-    states[61] = new State(-60);
-    states[62] = new State(new int[]{44,63,41,-68});
-    states[63] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,64});
-    states[64] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,44,-70,41,-70});
-    states[65] = new State(-62);
-    states[66] = new State(-63);
-    states[67] = new State(new int[]{40,68});
-    states[68] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,69});
-    states[69] = new State(new int[]{124,70,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[70] = new State(new int[]{129,75},new int[]{-10,71});
-    states[71] = new State(new int[]{41,72,44,73});
-    states[72] = new State(-64);
-    states[73] = new State(new int[]{129,74});
-    states[74] = new State(-66);
-    states[75] = new State(-65);
-    states[76] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,44,-69,41,-69});
-    states[77] = new State(new int[]{40,78});
-    states[78] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,79});
-    states[79] = new State(new int[]{41,80,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[80] = new State(-57);
-    states[81] = new State(new int[]{40,82});
-    states[82] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,83});
-    states[83] = new State(new int[]{41,84,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[84] = new State(-58);
-    states[85] = new State(new int[]{40,86});
-    states[86] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67,41,-67},new int[]{-1,87,-2,62,-5,76});
-    states[87] = new State(new int[]{41,88});
-    states[88] = new State(-59);
-    states[89] = new State(-14);
-    states[90] = new State(-15);
-    states[91] = new State(-16);
-    states[92] = new State(-17);
-    states[93] = new State(-18);
-    states[94] = new State(-19);
-    states[95] = new State(-20);
-    states[96] = new State(new int[]{61,97,40,59,59,-61,132,-61,155,-61,138,-61,149,-61,144,-61,43,-61,45,-61,42,-61,47,-61,37,-61});
-    states[97] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,98});
-    states[98] = new State(new int[]{59,99,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[99] = new State(-31);
-    states[100] = new State(-28,new int[]{-14,101});
-    states[101] = new State(new int[]{125,102,148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,22,-19,23,-18,122,-5,129});
-    states[102] = new State(-32);
-    states[103] = new State(new int[]{40,104});
-    states[104] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,105});
-    states[105] = new State(new int[]{41,106,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[106] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,107,-19,23,-18,122,-5,129});
-    states[107] = new State(-33);
-    states[108] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,109,-19,23,-18,122,-5,129});
-    states[109] = new State(-34);
-    states[110] = new State(new int[]{40,111});
-    states[111] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,112});
-    states[112] = new State(new int[]{41,113,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[113] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,114,-19,23,-18,122,-5,129});
-    states[114] = new State(-35);
-    states[115] = new State(new int[]{40,116});
-    states[116] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95},new int[]{-18,117,-19,135});
-    states[117] = new State(new int[]{147,118});
-    states[118] = new State(new int[]{129,119});
-    states[119] = new State(new int[]{41,120});
-    states[120] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95,129,96,123,100,146,103,137,108,167,110,140,115,136,124,128,48,164,49,139,50,153,51,130,53,131,65,157,66,154,67,158,131},new int[]{-15,121,-19,23,-18,122,-5,129});
-    states[121] = new State(-36);
-    states[122] = new State(new int[]{59,123});
-    states[123] = new State(-37);
-    states[124] = new State(new int[]{40,125});
-    states[125] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,126});
-    states[126] = new State(new int[]{41,127,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[127] = new State(new int[]{59,128});
-    states[128] = new State(-38);
-    states[129] = new State(new int[]{59,130,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[130] = new State(-39);
-    states[131] = new State(new int[]{59,134,128,48,164,49,139,50,153,51,130,53,129,58,131,65,157,66,154,67},new int[]{-5,132});
-    states[132] = new State(new int[]{59,133,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
-    states[133] = new State(-40);
-    states[134] = new State(-41);
-    states[135] = new State(new int[]{129,136});
-    states[136] = new State(-13);
-    states[137] = new State(new int[]{44,138,41,-25});
-    states[138] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95},new int[]{-18,139,-19,135});
-    states[139] = new State(-27);
-    states[140] = new State(-26);
-    states[141] = new State(-8);
-    states[142] = new State(new int[]{129,143});
+    states[51] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,52});
+    states[52] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,59,-55,44,-55,41,-55,124,-55});
+    states[53] = new State(new int[]{129,55,130,78,156,80,143,84,163,87,59,-64,132,-64,155,-64,138,-64,149,-64,144,-64,43,-64,45,-64,42,-64,47,-64,37,-64,44,-64,41,-64,124,-64},new int[]{-16,54});
+    states[54] = new State(-56);
+    states[55] = new State(new int[]{40,56});
+    states[56] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69,41,-70},new int[]{-1,57,-2,59,-5,66});
+    states[57] = new State(new int[]{41,58});
+    states[58] = new State(-57);
+    states[59] = new State(new int[]{44,60,41,-71});
+    states[60] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,61});
+    states[61] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,44,-73,41,-73});
+    states[62] = new State(new int[]{40,63,59,-60,132,-60,155,-60,138,-60,149,-60,144,-60,43,-60,45,-60,42,-60,47,-60,37,-60,44,-60,41,-60,124,-60});
+    states[63] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69,41,-70},new int[]{-1,64,-2,59,-5,66});
+    states[64] = new State(new int[]{41,65});
+    states[65] = new State(-59);
+    states[66] = new State(new int[]{132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46,44,-72,41,-72});
+    states[67] = new State(-61);
+    states[68] = new State(-62);
+    states[69] = new State(new int[]{40,70});
+    states[70] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,71});
+    states[71] = new State(new int[]{124,72,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[72] = new State(new int[]{129,77},new int[]{-10,73});
+    states[73] = new State(new int[]{41,74,44,75});
+    states[74] = new State(-63);
+    states[75] = new State(new int[]{129,76});
+    states[76] = new State(-69);
+    states[77] = new State(-68);
+    states[78] = new State(new int[]{156,80,143,84,163,87,59,-64,132,-64,155,-64,138,-64,149,-64,144,-64,43,-64,45,-64,42,-64,47,-64,37,-64,44,-64,41,-64,124,-64},new int[]{-16,79});
+    states[79] = new State(-58);
+    states[80] = new State(new int[]{40,81});
+    states[81] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,82});
+    states[82] = new State(new int[]{41,83,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[83] = new State(-65);
+    states[84] = new State(new int[]{40,85});
+    states[85] = new State(new int[]{41,86});
+    states[86] = new State(-66);
+    states[87] = new State(new int[]{40,88});
+    states[88] = new State(new int[]{41,89});
+    states[89] = new State(-67);
+    states[90] = new State(-14);
+    states[91] = new State(-15);
+    states[92] = new State(-16);
+    states[93] = new State(-17);
+    states[94] = new State(-18);
+    states[95] = new State(-19);
+    states[96] = new State(-20);
+    states[97] = new State(new int[]{61,98,40,63,59,-60,132,-60,155,-60,138,-60,149,-60,144,-60,43,-60,45,-60,42,-60,47,-60,37,-60});
+    states[98] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,99});
+    states[99] = new State(new int[]{59,100,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[100] = new State(-31);
+    states[101] = new State(-28,new int[]{-14,102});
+    states[102] = new State(new int[]{125,103,148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,22,-20,23,-19,123,-5,130});
+    states[103] = new State(-32);
+    states[104] = new State(new int[]{40,105});
+    states[105] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,106});
+    states[106] = new State(new int[]{41,107,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[107] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,108,-20,23,-19,123,-5,130});
+    states[108] = new State(-33);
+    states[109] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,110,-20,23,-19,123,-5,130});
+    states[110] = new State(-34);
+    states[111] = new State(new int[]{40,112});
+    states[112] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,113});
+    states[113] = new State(new int[]{41,114,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[114] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,115,-20,23,-19,123,-5,130});
+    states[115] = new State(-35);
+    states[116] = new State(new int[]{40,117});
+    states[117] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96},new int[]{-19,118,-20,136});
+    states[118] = new State(new int[]{147,119});
+    states[119] = new State(new int[]{129,120});
+    states[120] = new State(new int[]{41,121});
+    states[121] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96,129,97,123,101,146,104,137,109,167,111,140,116,136,125,128,48,164,49,139,50,153,51,130,53,131,67,157,68,154,69,158,132},new int[]{-15,122,-20,23,-19,123,-5,130});
+    states[122] = new State(-36);
+    states[123] = new State(new int[]{59,124});
+    states[124] = new State(-37);
+    states[125] = new State(new int[]{40,126});
+    states[126] = new State(new int[]{128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,127});
+    states[127] = new State(new int[]{41,128,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[128] = new State(new int[]{59,129});
+    states[129] = new State(-38);
+    states[130] = new State(new int[]{59,131,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[131] = new State(-39);
+    states[132] = new State(new int[]{59,135,128,48,164,49,139,50,153,51,130,53,129,62,131,67,157,68,154,69},new int[]{-5,133});
+    states[133] = new State(new int[]{59,134,132,28,155,30,138,32,149,34,144,36,43,38,45,40,42,42,47,44,37,46});
+    states[134] = new State(-40);
+    states[135] = new State(-41);
+    states[136] = new State(new int[]{129,137});
+    states[137] = new State(-13);
+    states[138] = new State(new int[]{44,139,41,-25});
+    states[139] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96},new int[]{-19,140,-20,136});
+    states[140] = new State(-27);
+    states[141] = new State(-26);
+    states[142] = new State(-8);
     states[143] = new State(new int[]{129,144});
-    states[144] = new State(new int[]{59,145});
-    states[145] = new State(-9);
-    states[146] = new State(new int[]{129,147});
-    states[147] = new State(new int[]{58,148});
-    states[148] = new State(-10,new int[]{-17,149});
-    states[149] = new State(new int[]{165,152,141,-21,135,-21},new int[]{-6,150,-16,151});
-    states[150] = new State(new int[]{141,13,135,-5},new int[]{-7,12});
-    states[151] = new State(-11);
-    states[152] = new State(new int[]{148,89,162,90,133,91,161,92,166,93,134,94,159,95},new int[]{-18,153,-19,135});
-    states[153] = new State(new int[]{59,154});
-    states[154] = new State(-12);
+    states[144] = new State(new int[]{129,145});
+    states[145] = new State(new int[]{59,146});
+    states[146] = new State(-9);
+    states[147] = new State(new int[]{129,148});
+    states[148] = new State(new int[]{58,149});
+    states[149] = new State(-10,new int[]{-18,150});
+    states[150] = new State(new int[]{165,153,141,-21,135,-21},new int[]{-6,151,-17,152});
+    states[151] = new State(new int[]{141,13,135,-5},new int[]{-7,12});
+    states[152] = new State(-11);
+    states[153] = new State(new int[]{148,90,162,91,133,92,161,93,166,94,134,95,159,96},new int[]{-19,154,-20,136});
+    states[154] = new State(new int[]{59,155});
+    states[155] = new State(-12);
 
     for (int sNo = 0; sNo < states.Length; sNo++) states[sNo].number = sNo;
 
-    rules[1] = new Rule(-21, new int[]{-20,127});
-    rules[2] = new Rule(-20, new int[]{-3,-13});
+    rules[1] = new Rule(-22, new int[]{-21,127});
+    rules[2] = new Rule(-21, new int[]{-3,-13});
     rules[3] = new Rule(-3, new int[]{});
     rules[4] = new Rule(-3, new int[]{-3,-4});
-    rules[5] = new Rule(-4, new int[]{135,134,129,58,-17,-6});
+    rules[5] = new Rule(-4, new int[]{135,134,129,58,-18,-6});
     rules[6] = new Rule(-13, new int[]{135,160,129,58,-9,-6});
     rules[7] = new Rule(-9, new int[]{});
     rules[8] = new Rule(-9, new int[]{-9,-8});
     rules[9] = new Rule(-8, new int[]{145,129,129,59});
-    rules[10] = new Rule(-17, new int[]{});
-    rules[11] = new Rule(-17, new int[]{-17,-16});
-    rules[12] = new Rule(-16, new int[]{165,-18,59});
-    rules[13] = new Rule(-18, new int[]{-19,129});
-    rules[14] = new Rule(-19, new int[]{148});
-    rules[15] = new Rule(-19, new int[]{162});
-    rules[16] = new Rule(-19, new int[]{133});
-    rules[17] = new Rule(-19, new int[]{161});
-    rules[18] = new Rule(-19, new int[]{166});
-    rules[19] = new Rule(-19, new int[]{134});
-    rules[20] = new Rule(-19, new int[]{159});
+    rules[10] = new Rule(-18, new int[]{});
+    rules[11] = new Rule(-18, new int[]{-18,-17});
+    rules[12] = new Rule(-17, new int[]{165,-19,59});
+    rules[13] = new Rule(-19, new int[]{-20,129});
+    rules[14] = new Rule(-20, new int[]{148});
+    rules[15] = new Rule(-20, new int[]{162});
+    rules[16] = new Rule(-20, new int[]{133});
+    rules[17] = new Rule(-20, new int[]{161});
+    rules[18] = new Rule(-20, new int[]{166});
+    rules[19] = new Rule(-20, new int[]{134});
+    rules[20] = new Rule(-20, new int[]{159});
     rules[21] = new Rule(-6, new int[]{});
     rules[22] = new Rule(-6, new int[]{-6,-7});
-    rules[23] = new Rule(-7, new int[]{141,-19,129,40,-11,41,123,-14,125});
+    rules[23] = new Rule(-7, new int[]{141,-20,129,40,-11,41,123,-14,125});
     rules[24] = new Rule(-11, new int[]{});
     rules[25] = new Rule(-11, new int[]{-12});
-    rules[26] = new Rule(-12, new int[]{-18});
-    rules[27] = new Rule(-12, new int[]{-12,44,-18});
+    rules[26] = new Rule(-12, new int[]{-19});
+    rules[27] = new Rule(-12, new int[]{-12,44,-19});
     rules[28] = new Rule(-14, new int[]{});
     rules[29] = new Rule(-14, new int[]{-14,-15});
-    rules[30] = new Rule(-15, new int[]{-19,129,61,-5,59});
+    rules[30] = new Rule(-15, new int[]{-20,129,61,-5,59});
     rules[31] = new Rule(-15, new int[]{129,61,-5,59});
     rules[32] = new Rule(-15, new int[]{123,-14,125});
     rules[33] = new Rule(-15, new int[]{146,40,-5,41,-15});
     rules[34] = new Rule(-15, new int[]{137,-15});
     rules[35] = new Rule(-15, new int[]{167,40,-5,41,-15});
-    rules[36] = new Rule(-15, new int[]{140,40,-18,147,129,41,-15});
-    rules[37] = new Rule(-15, new int[]{-18,59});
+    rules[36] = new Rule(-15, new int[]{140,40,-19,147,129,41,-15});
+    rules[37] = new Rule(-15, new int[]{-19,59});
     rules[38] = new Rule(-15, new int[]{136,40,-5,41,59});
     rules[39] = new Rule(-15, new int[]{-5,59});
     rules[40] = new Rule(-15, new int[]{158,-5,59});
@@ -318,21 +321,24 @@ public class Parser: ShiftReduceParser<ValueType, LexLocation>
     rules[53] = new Rule(-5, new int[]{-5,47,-5});
     rules[54] = new Rule(-5, new int[]{-5,37,-5});
     rules[55] = new Rule(-5, new int[]{153,-5});
-    rules[56] = new Rule(-5, new int[]{130,156,40,-5,41});
-    rules[57] = new Rule(-5, new int[]{130,143,40,-5,41});
-    rules[58] = new Rule(-5, new int[]{130,163,40,-5,41});
-    rules[59] = new Rule(-5, new int[]{130,129,40,-1,41});
-    rules[60] = new Rule(-5, new int[]{129,40,-1,41});
-    rules[61] = new Rule(-5, new int[]{129});
-    rules[62] = new Rule(-5, new int[]{131});
-    rules[63] = new Rule(-5, new int[]{157});
-    rules[64] = new Rule(-5, new int[]{154,40,-5,124,-10,41});
-    rules[65] = new Rule(-10, new int[]{129});
-    rules[66] = new Rule(-10, new int[]{-10,44,129});
-    rules[67] = new Rule(-1, new int[]{});
-    rules[68] = new Rule(-1, new int[]{-2});
-    rules[69] = new Rule(-2, new int[]{-5});
-    rules[70] = new Rule(-2, new int[]{-2,44,-5});
+    rules[56] = new Rule(-5, new int[]{130,-16});
+    rules[57] = new Rule(-5, new int[]{130,129,40,-1,41});
+    rules[58] = new Rule(-5, new int[]{130,130,-16});
+    rules[59] = new Rule(-5, new int[]{129,40,-1,41});
+    rules[60] = new Rule(-5, new int[]{129});
+    rules[61] = new Rule(-5, new int[]{131});
+    rules[62] = new Rule(-5, new int[]{157});
+    rules[63] = new Rule(-5, new int[]{154,40,-5,124,-10,41});
+    rules[64] = new Rule(-16, new int[]{});
+    rules[65] = new Rule(-16, new int[]{156,40,-5,41});
+    rules[66] = new Rule(-16, new int[]{143,40,41});
+    rules[67] = new Rule(-16, new int[]{163,40,41});
+    rules[68] = new Rule(-10, new int[]{129});
+    rules[69] = new Rule(-10, new int[]{-10,44,129});
+    rules[70] = new Rule(-1, new int[]{});
+    rules[71] = new Rule(-1, new int[]{-2});
+    rules[72] = new Rule(-2, new int[]{-5});
+    rules[73] = new Rule(-2, new int[]{-2,44,-5});
   }
 
   protected override void Initialize() {
@@ -348,279 +354,287 @@ public class Parser: ShiftReduceParser<ValueType, LexLocation>
     switch (action)
     {
       case 2: // prog -> clients, server
-#line 62 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 64 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { this.Prog = new Prog(ValueStack[ValueStack.Depth-2].clients, ValueStack[ValueStack.Depth-1].server); }
         break;
       case 3: // clients -> /* empty */
-#line 65 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 67 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.clients = new List<Client>(); }
         break;
       case 4: // clients -> clients, client
-#line 66 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 68 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].clients.Add(ValueStack[ValueStack.Depth-1].client); CurrentSemanticValue.clients=ValueStack[ValueStack.Depth-2].clients; }
         break;
       case 5: // client -> DECLARE, CLIENT, ID, ':', tunnels, functions
-#line 69 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 71 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.client = new Client(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].tunnels, ValueStack[ValueStack.Depth-1].functions); }
         break;
       case 6: // server -> DECLARE, SERVER, ID, ':', groups, functions
-#line 72 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 74 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.server = new Server(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].groups, ValueStack[ValueStack.Depth-1].functions); }
         break;
       case 7: // groups -> /* empty */
-#line 75 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 77 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.groups = new List<Group>(); }
         break;
       case 8: // groups -> groups, group
-#line 76 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 78 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].groups.Add(ValueStack[ValueStack.Depth-1].group); CurrentSemanticValue.groups = ValueStack[ValueStack.Depth-2].groups; }
         break;
       case 9: // group -> GROUPOF, ID, ID, ';'
-#line 79 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 81 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.group = new Group(ValueStack[ValueStack.Depth-3].identifier, new Id(ValueStack[ValueStack.Depth-2].identifier)); }
         break;
       case 10: // tunnels -> /* empty */
-#line 82 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 84 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.tunnels = new List<Tunnel>(); }
         break;
       case 11: // tunnels -> tunnels, tunnel
-#line 83 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 85 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].tunnels.Add(ValueStack[ValueStack.Depth-1].tunnel); CurrentSemanticValue.tunnels = ValueStack[ValueStack.Depth-2].tunnels; }
         break;
       case 12: // tunnel -> TUNNELOF, typed, ';'
-#line 86 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 88 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.tunnel = new Tunnel(ValueStack[ValueStack.Depth-2].typed); }
         break;
       case 13: // typed -> type, ID
-#line 89 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 91 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.typed = new Typed(ValueStack[ValueStack.Depth-2].type, new Id(ValueStack[ValueStack.Depth-1].identifier)); }
         break;
       case 14: // type -> INT
-#line 92 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 94 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new IntType(); }
         break;
       case 15: // type -> SINT
-#line 93 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 95 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SintType(); }
         break;
       case 16: // type -> BOOL
-#line 94 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 96 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new BoolType(); }
         break;
       case 17: // type -> SBOOL
-#line 95 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 97 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SboolType(); }
         break;
       case 18: // type -> VOID
-#line 96 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 98 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new VoidType(); }
         break;
       case 19: // type -> CLIENT
-#line 97 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 99 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new ClientType(); }
         break;
       case 20: // type -> SCLIENT
-#line 98 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 100 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.type = new SclientType(); }
         break;
       case 21: // functions -> /* empty */
-#line 102 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 104 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.functions = new List<Function>(); }
         break;
       case 22: // functions -> functions, function
-#line 103 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 105 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].functions.Add(ValueStack[ValueStack.Depth-1].function); CurrentSemanticValue.functions = ValueStack[ValueStack.Depth-2].functions; }
         break;
       case 23: // function -> FUNCTION, type, ID, '(', paramts, ')', '{', stmts, '}'
-#line 106 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 108 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.function = new Function(ValueStack[ValueStack.Depth-8].type, ValueStack[ValueStack.Depth-7].identifier, ValueStack[ValueStack.Depth-5].paramts, ValueStack[ValueStack.Depth-2].stmts); }
         break;
       case 24: // paramts -> /* empty */
-#line 109 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 111 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = new List<Typed>(); }
         break;
       case 25: // paramts -> nparamts
-#line 110 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 112 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = ValueStack[ValueStack.Depth-1].paramts; }
         break;
       case 26: // nparamts -> typed
-#line 113 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 115 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.paramts = new List<Typed>(); CurrentSemanticValue.paramts.Add(ValueStack[ValueStack.Depth-1].typed); }
         break;
       case 27: // nparamts -> nparamts, ',', typed
-#line 114 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 116 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].paramts.Add(ValueStack[ValueStack.Depth-1].typed); CurrentSemanticValue.paramts = ValueStack[ValueStack.Depth-3].paramts; }
         break;
       case 28: // stmts -> /* empty */
-#line 117 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 119 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmts = new List<Stmt>(); }
         break;
       case 29: // stmts -> stmts, stmt
-#line 118 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 120 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-2].stmts.Add(ValueStack[ValueStack.Depth-1].stmt); CurrentSemanticValue.stmts = ValueStack[ValueStack.Depth-2].stmts; }
         break;
       case 30: // stmt -> type, ID, '=', exp, ';'
-#line 121 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 123 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Declaration(new Typed(ValueStack[ValueStack.Depth-5].type, new Id(ValueStack[ValueStack.Depth-4].identifier)), new Assignment( new Id(ValueStack[ValueStack.Depth-4].identifier), ValueStack[ValueStack.Depth-2].exp));}
         break;
       case 31: // stmt -> ID, '=', exp, ';'
-#line 122 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 124 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Assignment( new Id(ValueStack[ValueStack.Depth-4].identifier), ValueStack[ValueStack.Depth-2].exp);}
         break;
       case 32: // stmt -> '{', stmts, '}'
-#line 123 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 125 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Block(ValueStack[ValueStack.Depth-2].stmts); }
         break;
       case 33: // stmt -> IF, '(', exp, ')', stmt
-#line 124 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 126 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new If(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>())); }
         break;
       case 34: // stmt -> ELSE, stmt
-#line 125 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 127 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Else(ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>())); }
         break;
       case 35: // stmt -> WHILE, '(', exp, ')', stmt
-#line 126 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 128 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 {CurrentSemanticValue.stmt = new While(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>()));}
         break;
       case 36: // stmt -> FOR, '(', typed, IN, ID, ')', stmt
-#line 127 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 129 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 {CurrentSemanticValue.stmt = new For(ValueStack[ValueStack.Depth-5].typed, new Id(ValueStack[ValueStack.Depth-3].identifier), ValueStack[ValueStack.Depth-1].stmt ?? new Block(new List<Stmt>()));}
         break;
       case 37: // stmt -> typed, ';'
-#line 128 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 130 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Declaration(ValueStack[ValueStack.Depth-2].typed);}
         break;
       case 38: // stmt -> DISPLAY, '(', exp, ')', ';'
-#line 129 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 131 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Display(ValueStack[ValueStack.Depth-3].exp); }
         break;
       case 39: // stmt -> exp, ';'
-#line 130 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 132 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new ExpStmt(ValueStack[ValueStack.Depth-2].exp);}
         break;
       case 40: // stmt -> RETURN, exp, ';'
-#line 131 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 133 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Return(ValueStack[ValueStack.Depth-2].exp); }
         break;
       case 41: // stmt -> RETURN, ';'
-#line 132 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 134 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.stmt = new Return(null); }
         break;
       case 42: // exp -> NUM
-#line 136 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 138 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new IntLiteral(ValueStack[ValueStack.Depth-1].intValue); }
         break;
       case 43: // exp -> exp, AND, exp
-#line 137 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 139 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new And(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 44: // exp -> exp, OR, exp
-#line 138 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 140 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Or(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 45: // exp -> exp, EQUAL, exp
-#line 139 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 141 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Equal(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 46: // exp -> exp, LESS_THAN, exp
-#line 140 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 142 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new LessThan(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 47: // exp -> exp, GREATER_THAN, exp
-#line 141 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 143 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new GreaterThan(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 48: // exp -> TRUE
-#line 142 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 144 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new BoolLiteral(true); }
         break;
       case 49: // exp -> FALSE
-#line 143 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 145 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new BoolLiteral(false); }
         break;
       case 50: // exp -> exp, '+', exp
-#line 144 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 146 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Sum(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 51: // exp -> exp, '-', exp
-#line 145 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 147 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Subtraction(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 52: // exp -> exp, '*', exp
-#line 146 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 148 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Product(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 53: // exp -> exp, '/', exp
-#line 147 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 149 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Division(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 54: // exp -> exp, '%', exp
-#line 148 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 150 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Module(ValueStack[ValueStack.Depth-3].exp, ValueStack[ValueStack.Depth-1].exp); }
         break;
       case 55: // exp -> NOT, exp
-#line 149 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 151 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Not(ValueStack[ValueStack.Depth-1].exp); }
         break;
-      case 56: // exp -> IDDOT, PUT, '(', exp, ')'
-#line 150 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-{ CurrentSemanticValue.exp = new Put(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
-        break;
-      case 57: // exp -> IDDOT, GET, '(', exp, ')'
-#line 151 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-{ CurrentSemanticValue.exp = new Get(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
-        break;
-      case 58: // exp -> IDDOT, TAKE, '(', exp, ')'
+      case 56: // exp -> IDDOT, tunMethod
 #line 152 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
-{ CurrentSemanticValue.exp = new Take(new Id(ValueStack[ValueStack.Depth-5].identifier), ValueStack[ValueStack.Depth-2].exp); }
+{ CurrentSemanticValue.exp = new TunMethodCall(new Id(ValueStack[ValueStack.Depth-2].identifier), ValueStack[ValueStack.Depth-1].tunMethod); }
         break;
-      case 59: // exp -> IDDOT, ID, '(', args, ')'
+      case 57: // exp -> IDDOT, ID, '(', args, ')'
 #line 153 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new MethodInvocation(new Id(ValueStack[ValueStack.Depth-5].identifier), new FunctionCall(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].args)); }
         break;
-      case 60: // exp -> ID, '(', args, ')'
+      case 58: // exp -> IDDOT, IDDOT, tunMethod
 #line 154 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+{ CurrentSemanticValue.exp = new DotClient(new Id(ValueStack[ValueStack.Depth-3].identifier), new TunMethodCall(new Id(ValueStack[ValueStack.Depth-2].identifier), ValueStack[ValueStack.Depth-1].tunMethod)); }
+        break;
+      case 59: // exp -> ID, '(', args, ')'
+#line 155 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new FunctionCall(ValueStack[ValueStack.Depth-4].identifier, ValueStack[ValueStack.Depth-2].args); }
         break;
-      case 61: // exp -> ID
-#line 155 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 60: // exp -> ID
+#line 156 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Id(ValueStack[ValueStack.Depth-1].identifier); }
         break;
-      case 62: // exp -> SSTRING
-#line 156 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 61: // exp -> SSTRING
+#line 157 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new SString(ValueStack[ValueStack.Depth-1].identifier); }
         break;
-      case 63: // exp -> READINT
-#line 157 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 62: // exp -> READINT
+#line 158 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new ReadInt(); }
         break;
-      case 64: // exp -> OPEN, '(', exp, '|', ids, ')'
-#line 158 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 63: // exp -> OPEN, '(', exp, '|', ids, ')'
+#line 159 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.exp = new Open(ValueStack[ValueStack.Depth-4].exp, ValueStack[ValueStack.Depth-2].ids); }
         break;
-      case 65: // ids -> ID
-#line 161 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 65: // tunMethod -> PUT, '(', exp, ')'
+#line 163 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+{ CurrentSemanticValue.tunMethod = new Put(ValueStack[ValueStack.Depth-2].exp); }
+        break;
+      case 66: // tunMethod -> GET, '(', ')'
+#line 164 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+{ CurrentSemanticValue.tunMethod = new Get(); }
+        break;
+      case 67: // tunMethod -> TAKE, '(', ')'
+#line 165 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+{ CurrentSemanticValue.tunMethod = new Take(); }
+        break;
+      case 68: // ids -> ID
+#line 168 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.ids = new List<Id>(); CurrentSemanticValue.ids.Add(new Id(ValueStack[ValueStack.Depth-1].identifier)); }
         break;
-      case 66: // ids -> ids, ',', ID
-#line 162 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 69: // ids -> ids, ',', ID
+#line 169 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].ids.Add(new Id(ValueStack[ValueStack.Depth-1].identifier)); CurrentSemanticValue.ids = ValueStack[ValueStack.Depth-3].ids; }
         break;
-      case 67: // args -> /* empty */
-#line 165 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 70: // args -> /* empty */
+#line 172 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = new List<Exp>(); }
         break;
-      case 68: // args -> nargs
-#line 166 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 71: // args -> nargs
+#line 173 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = ValueStack[ValueStack.Depth-1].args; }
         break;
-      case 69: // nargs -> exp
-#line 169 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 72: // nargs -> exp
+#line 176 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { CurrentSemanticValue.args = new List<Exp>(); CurrentSemanticValue.args.Add(ValueStack[ValueStack.Depth-1].exp); }
         break;
-      case 70: // nargs -> nargs, ',', exp
-#line 170 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+      case 73: // nargs -> nargs, ',', exp
+#line 177 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 { ValueStack[ValueStack.Depth-3].args.Add(ValueStack[ValueStack.Depth-1].exp); CurrentSemanticValue.args = ValueStack[ValueStack.Depth-3].args; }
         break;
     }
@@ -637,7 +651,7 @@ public class Parser: ShiftReduceParser<ValueType, LexLocation>
         return CharToString((char)terminal);
   }
 
-#line 174 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
+#line 181 "C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\ASTbuilder/SMCLparser.y"
 	public Parser(Scanner s) : base(s) {}
 }
 }

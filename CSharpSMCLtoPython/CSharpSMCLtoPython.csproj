@@ -95,6 +95,7 @@
   <ItemGroup>
     <Content Include="Generators\gplex.exe" />
     <Content Include="Generators\gppg.exe" />
+    <Content Include="Test\testFile.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

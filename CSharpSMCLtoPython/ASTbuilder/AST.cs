@@ -69,6 +69,8 @@ namespace CSharpSMCLtoPython.ASTbuilder
         void Visit(Open open);
         void Visit(MethodInvocation methodInvocation);
         void Visit(SString sstring);
+        void Visit(DotClient methodInvocation);
+        void Visit(TunMethodCall methodInvocation);
     }
 
 
@@ -99,9 +101,25 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+    internal class TunMethodCall : Exp
+    {
+        public readonly Id Id;
+        public readonly TunMethod TunMethod;
+
+        public TunMethodCall(Id id, TunMethod tunMethod)
+        {
+            Id = id;
+            TunMethod = tunMethod;
+        }
+
+        public override void Accept(ITreeNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
     internal abstract class TunMethod : Exp
     {
-        private readonly Id _id;
         private readonly Exp _exp;
 
         public Exp Exp
@@ -109,15 +127,9 @@ namespace CSharpSMCLtoPython.ASTbuilder
             get { return _exp; }
         }
 
-        public Id Id
-        {
-            get { return _id; }
-        }
-
-        protected TunMethod(Id id, Exp exp)
+        protected TunMethod(Exp exp)
         {
             _exp = exp;
-            _id = id;
         }
     }
 
@@ -294,6 +306,22 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+    internal class DotClient : Exp
+    {
+        public readonly Id ClientId ;
+        public readonly TunMethodCall TunMethodCall;
+
+        public DotClient(Id clientId, TunMethodCall tunMethodCall)
+        {
+            ClientId = clientId;
+            TunMethodCall = tunMethodCall;
+        }
+
+        public override void Accept(ITreeNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
     internal class LessThan : BinaryOp
     {
@@ -802,7 +830,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
     internal class Put : TunMethod
     {
-        public Put(Id id, Exp exp) : base(id, exp) { }
+        public Put(Exp exp) : base(exp) { }
 
         public override void Accept(ITreeNodeVisitor visitor)
         {
@@ -813,7 +841,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
     internal class Get : TunMethod
     {
-        public Get(Id id, Exp exp) : base(id, exp) { }
+        public Get(Exp exp=null) : base(exp) { }
 
         public override void Accept(ITreeNodeVisitor visitor)
         {
@@ -823,7 +851,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
     internal class Take : TunMethod
     {
-        public Take(Id id, Exp exp) : base(id, exp) { }
+        public Take(Exp exp=null) : base(exp) { }
 
         public override void Accept(ITreeNodeVisitor visitor)
         {

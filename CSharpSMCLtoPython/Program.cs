@@ -10,7 +10,7 @@ namespace CSharpSMCLtoPython {
         private static void Main(string[] args)
         {
             //var stream = args.Length > 0 ? new FileStream(args[0], FileMode.Open) : Console.OpenStandardInput();
-            FileStream stream = new FileStream("C:\\Users\\Simone\\test.txt", FileMode.Open);
+            FileStream stream = new FileStream("C:\\Users\\Simone\\Documents\\GitHub\\CSharpSMCLtoPython\\CSharpSMCLtoPython\\Test\\testFile.txt", FileMode.Open);
             
 
             var parser = new Parser(new Scanner(stream));
@@ -28,7 +28,7 @@ namespace CSharpSMCLtoPython {
                     /*
                     var pyGen = new GenerateLlvmVisitor();
                     parsedProgram.Accept(codeGen);
-                    Console.WriteLine("LLVM CODE:\n{0}\n", codeGen.Result);
+                    Console.WriteLine("PYTHON CODE:\n{0}\n", codeGen.Result);
                     try {
                         using (var sw = File.CreateText(@"test.ll"))
                             sw.Write(codeGen.Result);

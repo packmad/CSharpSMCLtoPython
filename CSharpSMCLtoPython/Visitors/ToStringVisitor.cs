@@ -1,9 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using CSharpSMCLtoPython.ASTbuilder;
-//using SmclType = CSharpSMCLtoPython.ASTbuilder.SmclType;
+
 
 namespace CSharpSMCLtoPython.Visitors
 {
@@ -21,7 +20,7 @@ namespace CSharpSMCLtoPython.Visitors
         {
             for (int i=0; i<Level; i++)
             {
-                _sb.Append("|--");
+                _sb.Append("\t");
             }
         }
 
@@ -321,23 +320,16 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Take take)
         {
-            take.Id.Accept(this);
-            _sb.Append(".take(");
-            take.Exp.Accept(this);
-            _sb.Append(")");
+            _sb.Append(".take()");
         }
 
         public void Visit(Get get)
         {
-            get.Id.Accept(this);
-            _sb.Append(".get(");
-            get.Exp.Accept(this);
-            _sb.Append(")");
+            _sb.Append(".get()");
         }
 
         public void Visit(Put put)
         {
-            put.Id.Accept(this);
             _sb.Append(".put(");
             put.Exp.Accept(this);
             _sb.Append(")");
@@ -371,16 +363,28 @@ namespace CSharpSMCLtoPython.Visitors
             _sb.Append(")");
         }
 
-        public void Visit(MethodInvocation methodInvocation)
+        public void Visit(MethodInvocation classDot)
         {
-            methodInvocation.Id.Accept(this);
+            classDot.Id.Accept(this);
             _sb.Append(".");
-            methodInvocation.FunctionCall.Accept(this);
+            classDot.FunctionCall.Accept(this);
         }
 
         public void Visit(SString sstring)
         {
             _sb.Append(sstring.Value);
+        }
+
+        public void Visit(DotClient methodInvocation)
+        {
+            _sb.Append(methodInvocation.ClientId.Name + ".");
+            methodInvocation.TunMethodCall.Accept(this);
+        }
+
+        public void Visit(TunMethodCall tunMethodCall)
+        {
+            tunMethodCall.Id.Accept(this);
+            tunMethodCall.TunMethod.Accept(this);
         }
     }
 }

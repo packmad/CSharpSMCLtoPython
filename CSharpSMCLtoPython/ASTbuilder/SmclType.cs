@@ -2,7 +2,7 @@
 
 namespace CSharpSMCLtoPython.ASTbuilder
 {
-    internal enum SmclT
+    internal enum SmclT // now useless, but in future...
     {
         NoneT,
         IntT,
@@ -164,7 +164,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
         public override Type GetSecret()
         {
-            return typeof (SclientType);
+            return typeof (SboolType);
         }
     }
 

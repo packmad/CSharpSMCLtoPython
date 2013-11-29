@@ -64,7 +64,7 @@ namespace CSharpSMCLtoPython.Visitors
         {
             if (SymbolTable.ContainsKey(id))
                 return SymbolTable[id];
-            throw new TypeCheckingException("'"+id + "' is never defined.");
+            throw new TypeCheckingException("'" + id + "' is never defined.");
         }
 
         public SmclType GetReturn()
@@ -91,7 +91,7 @@ namespace CSharpSMCLtoPython.Visitors
             {
                 Groups = new Dictionary<string, PartEnv>();
             }
-            if (mp.GetType() == typeof (Client))
+            if (mp.GetType() == typeof(Client))
             {
                 Tunnels = new Dictionary<string, SmclType>();
             }
@@ -99,10 +99,9 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Add(Function fun)
         {
-            foreach (var f in Functions.Values)
+            if (Functions.Values.Any(f => f.Function.Name == fun.Name))
             {
-                if (f.Function.Name == fun.Name)
-                    throw new TypeCheckingException("There are two functions with the same name: " + fun.Name);
+                throw new TypeCheckingException("There are two functions with the same name: " + fun.Name);
             }
             Functions.Add(fun.Name, new FuncEnv(fun));
 
@@ -116,22 +115,18 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void CheckTunnelMethod(string id, SmclType expType)
         {
-            /*
             if (Mp.GetType() != typeof(Client))
-                throw new TypeCheckingException("tunnel methods can be used only within Clients.");
-            */
-            //TODO da invocare all'interno di un client
+                throw new TypeCheckingException("tunnel can be used only within client.");
             if (!Tunnels.ContainsKey(id))
                 throw new TypeCheckingException(id + " isn't defined as tunnel.");
 
-            if (! Tunnels[id].Equals(expType))
+            if (!Tunnels[id].Equals(expType))
                 throw new TypeCheckingException(
                     String.Format(
                         "the tunnel {0} has type {1} but is invoked with a {2} expression.",
                         id, Tunnels[id], expType
                         )
                 );
-            
         }
 
     }
@@ -142,93 +137,86 @@ namespace CSharpSMCLtoPython.Visitors
         public List<PartEnv> Clients = new List<PartEnv>();
         public PartEnv Server { get; set; }
 
-        public PartEnv TmpPartEnv { get; set; }
+        public PartEnv VisitPartEnv { get; set; }
         public PartEnv InvokingOn { get; set; } // used for method invocation
-        public string TmpFunName { get; set; }
+        public string VisitFunName { get; set; }
 
         public void Add(Client c)
         {
             PartEnv ce = new PartEnv(c);
             Clients.Add(ce);
-            TmpPartEnv = ce;
+            VisitPartEnv = ce;
         }
 
         public void Add(Server s)
         {
             PartEnv ce = new PartEnv(s);
             Server = ce;
-            TmpPartEnv = ce;
+            VisitPartEnv = ce;
         }
 
         public bool IsVisitingServer()
         {
-            return TmpPartEnv.Mp.GetType() == typeof(Server);
+            return VisitPartEnv.Mp.GetType() == typeof(Server);
         }
 
         public bool VariableAlreadyDefined(string idName)
         {
-            if (TmpFunName == null)
+            if (VisitFunName == null)
                 return false;
-            return TmpPartEnv.Functions[TmpFunName].SymbolTable.ContainsKey(idName);
+            return VisitPartEnv.Functions[VisitFunName].SymbolTable.ContainsKey(idName);
         }
 
         public SmclType GetMyTypeFromId(string idName)
         {
             if (IsVisitingServer())
             {
-                if (TmpPartEnv.Groups.ContainsKey(idName))
+                if (VisitPartEnv.Groups.ContainsKey(idName))
                 {
                     return new ClientType();
                 }
             }
             else
             {
-                if (TmpPartEnv.Tunnels.ContainsKey(idName))
+                if (VisitPartEnv.Tunnels.ContainsKey(idName))
                     return new TunnelType();
             }
-            return TmpPartEnv.Functions[TmpFunName].GetTypeFromId(idName);
+            return VisitPartEnv.Functions[VisitFunName].GetTypeFromId(idName);
         }
 
         public void AddSymbolInFunction(string id, SmclType type)
         {
             if (IsVisitingServer())
             {
-                Server s = (Server)TmpPartEnv.Mp;
+                Server s = (Server)VisitPartEnv.Mp;
                 foreach (var group in s.Groups)
                 {
                     if (group.Id.Name == id)
-                        throw new TypeCheckingException("GroupName conflict group"); //TODO
+                        throw new TypeCheckingException("there's a group with the same id --> '" + id + "'");
                 }
-                /* TODO leggi le specifiche merda
-                foreach (var tunnel in Server.Tunnels.Keys)
-                {
-                    if (tunnel == id)
-                        throw new TypeCheckingException("GroupName in server conflict tunnel"); //TODO
-                }
-                 */
             }
             else
             {
-                
-                Client c = (Client)TmpPartEnv.Mp;
+
+                Client c = (Client)VisitPartEnv.Mp;
                 foreach (var tunnel in c.Tunnels)
                 {
                     if (tunnel.Typed.Id.Name == id)
-                        throw new TypeCheckingException("GroupName conflict tunnel"); //TODO
+                        throw new TypeCheckingException("there's a tunnel with the same id --> '" + id + "'");
                 }
             }
-            if (!TmpPartEnv.Functions.ContainsKey(TmpFunName))
-                throw new TypeCheckingException("function not found"); //TODO
-            if (TmpPartEnv.Functions[TmpFunName].SymbolTable.ContainsKey(id))
-                throw new TypeCheckingException("duplicate variable"); //TODO
-            TmpPartEnv.Functions[TmpFunName].SymbolTable.Add(id, type);
+            if (!VisitPartEnv.Functions.ContainsKey(VisitFunName))
+                throw new TypeCheckingException("typechecker logic fails in AddSymbolInFunction function.");
+            if (VisitPartEnv.Functions[VisitFunName].SymbolTable.ContainsKey(id))
+                throw new TypeCheckingException("this id is already defined --> '" + id + "'");
+            VisitPartEnv.Functions[VisitFunName].SymbolTable.Add(id, type);
         }
 
         public void RemoveSymbolInFunction(string id)
         {
-            if (!TmpPartEnv.Functions.ContainsKey(TmpFunName))
-                throw new TypeCheckingException("function not found"); //TODO
-            TmpPartEnv.Functions[TmpFunName].SymbolTable.Remove(id);
+            if (!VisitPartEnv.Functions.ContainsKey(VisitFunName))
+                throw new TypeCheckingException("typechecker logic fails in RemoveSymbolInFunction function.");
+            VisitPartEnv.Functions[VisitFunName].SymbolTable.Remove(id);
         }
 
         public void AddClientForMethodInvocation(Typed var, PartEnv client)
@@ -236,20 +224,20 @@ namespace CSharpSMCLtoPython.Visitors
             if (!IsVisitingServer())
                 throw new TypeCheckingException("you can invoke methods only from a Server instance --> " + var.Id.Name);
             AddSymbolInFunction(var.Id.Name, var.SmclType);
-            TmpPartEnv.Functions[TmpFunName].IdToClient.Add(var.Id.Name, client);
+            VisitPartEnv.Functions[VisitFunName].IdToClient.Add(var.Id.Name, client);
         }
 
         public void RemoveClientForMethodInvocation(Typed var)
         {
             RemoveSymbolInFunction(var.Id.Name);
-            TmpPartEnv.Functions[TmpFunName].IdToClient.Remove(var.Id.Name);
+            VisitPartEnv.Functions[VisitFunName].IdToClient.Remove(var.Id.Name);
         }
     }
 
 
     internal class TypecheckVisitor : ITreeNodeVisitor
     {
-        private Env _env = new Env();
+        private readonly Env _env = new Env();
         private static readonly IntType IntType = new IntType();
         private static readonly SintType SintType = new SintType();
         private static readonly BoolType BoolType = new BoolType();
@@ -260,14 +248,9 @@ namespace CSharpSMCLtoPython.Visitors
         private static readonly SclientType SclientType = new SclientType();
         private static readonly ServerType ServerType = new ServerType();
         private static readonly GroupType GroupType = new GroupType();
-        private static readonly TunnelType TunnelType = new TunnelType();
-        /*
-        public TypecheckVisitor()
-        {
 
-        }
-        */
-        private static SmclType ConvertToSecret (SmclType t)
+
+        private static SmclType ConvertToSecret(SmclType t)
         {
             var ttype = t.GetSecret();
             if (ttype == null)
@@ -306,14 +289,14 @@ namespace CSharpSMCLtoPython.Visitors
             }
             return null;
         }
-        
+
         private static void MustBe(SmclType t, SmclType mustBe, string msg)
         {
             if (!t.Equals(mustBe))
                 throw new TypeCheckingException(msg);
         }
 
-        
+
         private void MustBeSintOrSubtype(SmclType t, string msg)
         {
             MustBe(t, IntType, msg);
@@ -324,7 +307,7 @@ namespace CSharpSMCLtoPython.Visitors
         {
             MustBe(t, BoolType, msg);
         }
-        
+
 
         private void ResultIsSintAndBothOperandsMustBeSintOrSubtype(BinaryOp binaryOp)
         {
@@ -471,8 +454,8 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Function function)
         {
-            _env.TmpPartEnv.Add(function);
-            _env.TmpFunName = function.Name;
+            _env.VisitPartEnv.Add(function);
+            _env.VisitFunName = function.Name;
             foreach (var s in function.Stmts)
             {
                 s.Accept(this);
@@ -517,15 +500,16 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Tunnel tunnel)
         {
             tunnel.Typed.Accept(this);
-            if (_env.TmpPartEnv.Tunnels.ContainsKey(tunnel.Typed.Id.Name))
+            if (_env.VisitPartEnv.Tunnels.ContainsKey(tunnel.Typed.Id.Name))
                 throw new TypeCheckingException("there's another tunnel with the same name --> " + tunnel.Typed.Id.Name);
-            _env.TmpPartEnv.Tunnels.Add(tunnel.Typed.Id.Name, tunnel.Typed.SmclType);
+            _env.VisitPartEnv.Tunnels.Add(tunnel.Typed.Id.Name, tunnel.Typed.SmclType);
             tunnel.SmclType = new TunnelType(tunnel.Typed.SmclType);
         }
 
         public void Visit(Client client)
         {
             _env.Add(client);
+            client.SmclType = ClientType;
             foreach (var t in client.Tunnels)
             {
                 t.Accept(this);
@@ -539,6 +523,7 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Server server)
         {
             _env.Add(server);
+            server.SmclType = ServerType;
             foreach (var g in server.Groups)
             {
                 g.Accept(this);
@@ -556,11 +541,11 @@ namespace CSharpSMCLtoPython.Visitors
             ffor.Typed.Accept(this);
             MustBe(ffor.Typed.SmclType, ClientType, "for each only with Client, not --> " + ffor.Typed.SmclType);
             ffor.Id.Accept(this);
-            foreach (var g in _env.TmpPartEnv.Groups.Keys)
+            foreach (var g in _env.VisitPartEnv.Groups.Keys)
             {
                 if (g == ffor.Id.Name) // (group, id, env)
                 {
-                    _env.AddClientForMethodInvocation(ffor.Typed, _env.TmpPartEnv.Groups[g]);
+                    _env.AddClientForMethodInvocation(ffor.Typed, _env.VisitPartEnv.Groups[g]);
                     ffor.Body.Accept(this);
                     _env.RemoveClientForMethodInvocation(ffor.Typed);
                     return;
@@ -580,11 +565,11 @@ namespace CSharpSMCLtoPython.Visitors
             FuncEnv targetFunction = null;
             if (_env.InvokingOn == null)
             {
-                if(_env.TmpPartEnv.Functions.Keys.All(fName => functionCall.Name != fName))
+                if (_env.VisitPartEnv.Functions.Keys.All(fName => functionCall.Name != fName))
                 {
                     throw new TypeCheckingException(functionCall.Name + " isn't defined.\n");
                 }
-                targetFunction = _env.TmpPartEnv.Functions[functionCall.Name];
+                targetFunction = _env.VisitPartEnv.Functions[functionCall.Name];
                 targetFunction.ArgsMatchParamsType(functionCall.Params);
             }
             if (_env.InvokingOn != null)
@@ -592,7 +577,7 @@ namespace CSharpSMCLtoPython.Visitors
                 targetFunction = _env.InvokingOn.Functions[functionCall.Name];
                 targetFunction.ArgsMatchParamsType(functionCall.Params);
             }
-            if (targetFunction!=null)
+            if (targetFunction != null)
                 functionCall.SmclType = targetFunction.GetReturn();
             else
                 throw new TypeCheckingException("typechecker logic fails in functionCall visit.");
@@ -615,26 +600,17 @@ namespace CSharpSMCLtoPython.Visitors
             if (declaration.Assignment != null)
             {
                 declaration.Assignment.Accept(this);
-                /*
-                if (!declaration.Typed.SmclType.Equals(declaration.Assignment.SmclType))
-                    throw new TypeCheckingException(
-                        "declaration followed by a wrong assignment. "
-                        + declaration.Typed.SmclType
-                        + " = "
-                        + declaration.Assignment.SmclType
-                        + "\nThey must be the same type."
-                        );
-                 */
             }
         }
 
         public void Visit(Group group)
         {
+            group.SmclType = GroupType;
             foreach (var c in _env.Clients)
             {
                 if (c.PartName == group.Name)
                 {
-                    _env.TmpPartEnv.Groups.Add(group.Id.Name, c);
+                    _env.VisitPartEnv.Groups.Add(group.Id.Name, c);
                     return;
                 }
             }
@@ -649,24 +625,20 @@ namespace CSharpSMCLtoPython.Visitors
         // is blocking and if the tunnel is empty waits until a value becomes available
         public void Visit(Take take)
         {
-            take.Exp.Accept(this);
-            _env.TmpPartEnv.CheckTunnelMethod(take.Id.Name, take.Exp.SmclType);
-            take.SmclType = take.Exp.SmclType;
+            // nothing to do!
         }
 
         // is non-blocking and if the tunnel is empty returns the special value Null
         public void Visit(Get get)
         {
-            get.Exp.Accept(this);
-            _env.TmpPartEnv.CheckTunnelMethod(get.Id.Name, get.Exp.SmclType);
-            get.SmclType = get.Exp.SmclType;
+            // nothing to do!
         }
 
         // Values may be placed in the tunnel using
         public void Visit(Put put)
         {
             put.Exp.Accept(this);
-            _env.TmpPartEnv.CheckTunnelMethod(put.Id.Name, put.Exp.SmclType);
+            put.SmclType = put.Exp.SmclType;
         }
 
         public void Visit(Return rreturn)
@@ -680,7 +652,7 @@ namespace CSharpSMCLtoPython.Visitors
             {
                 rreturn.SmclType = VoidType;
             }
-            SmclType expectedRetType = _env.TmpPartEnv.Functions[_env.TmpFunName].GetReturn();
+            SmclType expectedRetType = _env.VisitPartEnv.Functions[_env.VisitFunName].GetReturn();
             MustBe(rreturn.SmclType, expectedRetType, "return a " + rreturn.SmclType + " in a " + expectedRetType + " function");
         }
 
@@ -693,23 +665,23 @@ namespace CSharpSMCLtoPython.Visitors
         {
             if (!_env.IsVisitingServer())
                 throw new TypeCheckingException("Open(..|..) can be used only within server");
-            
+
             foreach (var id in open.Args)
             {
-                SmclType tmpt = _env.GetMyTypeFromId(id.Name); //_env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name];
+                SmclType tmpt = _env.GetMyTypeFromId(id.Name);
 
-                if (! tmpt.IsSecret())
+                if (!tmpt.IsSecret())
                     throw new TypeCheckingException("open only on secret variables");
                 tmpt = ConvertToPublic(tmpt);
-                _env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name] = tmpt;
+                _env.VisitPartEnv.Functions[_env.VisitFunName].SymbolTable[id.Name] = tmpt;
             }
             open.Exp.Accept(this);
             open.SmclType = open.Exp.SmclType;
             foreach (var id in open.Args)
             {
-                SmclType tmpt = _env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name];
+                SmclType tmpt = _env.VisitPartEnv.Functions[_env.VisitFunName].SymbolTable[id.Name];
                 tmpt = ConvertToSecret(tmpt);
-                _env.TmpPartEnv.Functions[_env.TmpFunName].SymbolTable[id.Name] = tmpt;
+                _env.VisitPartEnv.Functions[_env.VisitFunName].SymbolTable[id.Name] = tmpt;
             }
         }
 
@@ -717,9 +689,9 @@ namespace CSharpSMCLtoPython.Visitors
         {
             if (!_env.IsVisitingServer())
                 throw new TypeCheckingException("you can invoke methods only from a Server instance.");
-            if (_env.TmpPartEnv.Functions[_env.TmpFunName].IdToClient.ContainsKey(mi.Id.Name))
+            if (_env.VisitPartEnv.Functions[_env.VisitFunName].IdToClient.ContainsKey(mi.Id.Name))
             {
-                _env.InvokingOn = _env.TmpPartEnv.Functions[_env.TmpFunName].IdToClient[mi.Id.Name];
+                _env.InvokingOn = _env.VisitPartEnv.Functions[_env.VisitFunName].IdToClient[mi.Id.Name];
                 if (!_env.InvokingOn.Functions.ContainsKey(mi.FunctionCall.Name))
                 {
                     throw new TypeCheckingException(
@@ -733,7 +705,7 @@ namespace CSharpSMCLtoPython.Visitors
             }
             else
             {
-                throw new TypeCheckingException("invoking a method from an undefined variable --> "+mi.Id.Name);
+                throw new TypeCheckingException("invoking a method from an undefined variable --> " + mi.Id.Name);
             }
             _env.InvokingOn = null;
         }
@@ -741,6 +713,37 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(SString sstring)
         {
             sstring.SmclType = new StringType();
+        }
+
+        public void Visit(DotClient dotClient)
+        {
+            if (!_env.IsVisitingServer())
+                throw new TypeCheckingException("can't access a client '" + dotClient.ClientId + "' from a client '" + _env.VisitPartEnv.PartName + "'.");
+            var x = _env.VisitPartEnv.Functions[_env.VisitFunName].IdToClient[dotClient.ClientId.Name];
+            foreach (var c in _env.Clients)
+            {
+                if (c.PartName == x.PartName)
+                {
+                    PartEnv tmp = _env.VisitPartEnv;
+                    _env.VisitPartEnv = c;
+                    dotClient.TunMethodCall.Accept(this);
+                    _env.VisitPartEnv = tmp;
+                    dotClient.SmclType = dotClient.TunMethodCall.TunMethod.SmclType;
+                    return;
+                }
+
+            }
+            throw new TypeCheckingException("can't use a dot operator on a non-client '" + dotClient.ClientId.Name + "'");
+        }
+
+        public void Visit(TunMethodCall tunMethodCall)
+        {
+            tunMethodCall.TunMethod.Accept(this);
+            if (tunMethodCall.TunMethod.GetType() == typeof(Put))
+                tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType;
+            else
+                tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType = _env.VisitPartEnv.Tunnels[tunMethodCall.Id.Name];
+            _env.VisitPartEnv.CheckTunnelMethod(tunMethodCall.Id.Name, tunMethodCall.TunMethod.SmclType);
         }
     }
 }
