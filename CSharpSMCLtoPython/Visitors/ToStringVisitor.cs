@@ -107,15 +107,11 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Id id) 
         {
-            _sb.Append(id.Name);// == null ? id.Typed : id.Var.Typed);
+            _sb.Append(id.Name);
         }
 
         public void Visit(Display print) 
         {
-            /*if (print.Exp.SmclType != null)
-                _sb.Append(print.Exp.SmclType.Equals(SmclType.BoolT) ? "print_bool" : "print_int");
-            else
-                _sb.Append("print");*/
             _sb.Append("display(");
             print.Exp.Accept(this);
             _sb.Append(")");
@@ -142,12 +138,9 @@ namespace CSharpSMCLtoPython.Visitors
 
         }
 
-
-
         public void Visit(Block block) 
         {
             _sb.Append(" {");
-            //Indent();
             ++Level;
             foreach (var stmt in block.Statements)
             {
@@ -163,6 +156,7 @@ namespace CSharpSMCLtoPython.Visitors
                     
         }
 
+
         public void Visit(Prog prog) 
         {
             foreach (var c in prog.Clients)
@@ -172,6 +166,7 @@ namespace CSharpSMCLtoPython.Visitors
             }
             prog.Server.Accept(this);
         }
+
 
         public void Visit(Function function)
         {
@@ -183,7 +178,6 @@ namespace CSharpSMCLtoPython.Visitors
                     p.Accept(this);
                     _sb.Append(", ");
                 }
-                //_sb.Remove(_sb.Length - 2, 2);
             }
             _sb.Append(")\n{");
             ++Level;
@@ -195,12 +189,10 @@ namespace CSharpSMCLtoPython.Visitors
                     Indent();
                     s.Accept(this);
                 }
-                //_sb.Remove(_sb.Length - 2, 2);
             }
             _sb.Append("\n}\n");
             --Level;
         }
-
 
         public void Visit(Else eelse)
         {
@@ -277,7 +269,6 @@ namespace CSharpSMCLtoPython.Visitors
                     arg.Accept(this);
                     _sb.Append(", ");
                 }
-                //_sb.Remove(_sb.Length - 2, 2);
             }
             if (functionCall.Params.Count == 1)
                 _sb.Remove(_sb.Length - 2, 2);

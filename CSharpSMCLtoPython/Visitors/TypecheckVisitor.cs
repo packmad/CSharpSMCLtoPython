@@ -10,13 +10,6 @@ namespace CSharpSMCLtoPython.Visitors
     [Serializable]
     public class TypeCheckingException : Exception
     {
-        //
-        // For guidelines regarding the creation of new exception types, see
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
-        // and
-        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
-        //
-
         public TypeCheckingException() { }
         public TypeCheckingException(string message) : base(message) { }
         public TypeCheckingException(string message, Exception inner) : base(message, inner) { }
@@ -33,7 +26,6 @@ namespace CSharpSMCLtoPython.Visitors
         public Function Function;
         public Dictionary<string, SmclType> SymbolTable = new Dictionary<string, SmclType>();
         public Dictionary<string, PartEnv> IdToClient = new Dictionary<string, PartEnv>(); // for method invocation
-
 
         public void ArgsMatchParamsType(IList<Exp> @args)
         {
@@ -73,11 +65,11 @@ namespace CSharpSMCLtoPython.Visitors
         }
     }
 
+
     internal class PartEnv
     {
-        // name -> env
         public string PartName { get; private set; }
-        public Dictionary<string, FuncEnv> Functions = new Dictionary<string, FuncEnv>();
+        public Dictionary<string, FuncEnv> Functions = new Dictionary<string, FuncEnv>(); // name -> env
         public Dictionary<string, SmclType> Tunnels;
         public Dictionary<string, PartEnv> Groups; // e.g. mills -> Millionaries
 
@@ -543,7 +535,7 @@ namespace CSharpSMCLtoPython.Visitors
             ffor.Id.Accept(this);
             foreach (var g in _env.VisitPartEnv.Groups.Keys)
             {
-                if (g == ffor.Id.Name) // (group, id, env)
+                if (g == ffor.Id.Name)
                 {
                     _env.AddClientForMethodInvocation(ffor.Typed, _env.VisitPartEnv.Groups[g]);
                     ffor.Body.Accept(this);

@@ -4,8 +4,8 @@ using CSharpSMCLtoPython.Visitors;
 
 namespace CSharpSMCLtoPython.ASTbuilder
 {
-    //internal enum SmclT { NoneT, IntT, SintT, BoolT, SboolT, StringT, VoidT, ClientT, SclientT, ServerT, GroupT, TunnelT}
     internal enum TunMethodType { NoneM, PutM, GetM, TakeM }
+
 
     internal abstract class TreeNode
     {
@@ -26,6 +26,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             return pv.Result;
         }
     }
+
 
     internal interface ITreeNodeVisitor
     {
@@ -76,7 +77,9 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
     internal abstract class Exp : TreeNode  { }
     
+
     internal abstract class Stmt : TreeNode { }
+
 
     internal abstract class Multipart : TreeNode
     {
@@ -93,13 +96,13 @@ namespace CSharpSMCLtoPython.ASTbuilder
             get { return _functions; }
         }
 
-
         protected Multipart(string name, IList<Function> @functions)
         {
             _name = name;
             _functions = @functions;
         }
     }
+
 
     internal class TunMethodCall : Exp
     {
@@ -117,6 +120,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal abstract class TunMethod : Exp
     {
@@ -167,6 +171,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class Subtraction : BinaryOp
     {
         public Subtraction(Exp left, Exp right) : base(left, right) { }
@@ -176,6 +181,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class Product : BinaryOp
     {
@@ -187,6 +193,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class Division : BinaryOp
     {
         public Division(Exp left, Exp right) : base(left, right) { }
@@ -196,6 +203,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class Module : BinaryOp
     {
@@ -207,17 +215,17 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class And : BinaryOp
     {
-        public And(Exp left, Exp right) : base(left, right) {
-            // SmclType = SmclType.BOOL_T;
-        }
+        public And(Exp left, Exp right) : base(left, right) {}
 
         public override void Accept(ITreeNodeVisitor visitor)
         {
             visitor.Visit(this);
         }
     }
+
 
     internal class Or : BinaryOp
     {
@@ -229,6 +237,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class Equal : BinaryOp
     {
         public Equal(Exp left, Exp right) : base(left, right) { }
@@ -238,6 +247,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class ExpStmt : Stmt
     {
@@ -258,6 +268,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class FunctionCall : Exp
     {
@@ -286,6 +297,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class MethodInvocation : Exp
     {
         private readonly Id _id;
@@ -306,6 +318,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class DotClient : Exp
     {
         public readonly Id ClientId ;
@@ -323,6 +336,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class LessThan : BinaryOp
     {
         public LessThan(Exp left, Exp right) : base(left, right) { }
@@ -333,6 +347,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class GreaterThan : BinaryOp
     {
         public GreaterThan(Exp left, Exp right) : base(left, right) { }
@@ -342,6 +357,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal abstract class UnaryOperator : Exp
     {
@@ -434,6 +450,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class EvalExp : Stmt
     {
         private readonly Exp _exp;
@@ -518,6 +535,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class Group : TreeNode
     {
         private readonly string _name;
@@ -573,7 +591,6 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
-
     
     internal class Function : TreeNode
     {
@@ -619,6 +636,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
 
     }
 
+
     internal class Assignment : Stmt
     {
         private readonly Id _id;
@@ -645,6 +663,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class Declaration : Stmt
     {
@@ -714,6 +733,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class If : Stmt
     {
         private readonly Exp _guard;
@@ -759,6 +779,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class While : Stmt
     {
         private readonly Exp _guard;
@@ -780,12 +801,12 @@ namespace CSharpSMCLtoPython.ASTbuilder
             get { return _body; }
         }
 
-
         public override void Accept(ITreeNodeVisitor visitor)
         {
             visitor.Visit(this);
         }
     }
+
 
     internal class For : Stmt
     {
@@ -810,6 +831,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class Args
     {
@@ -849,6 +871,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class Take : TunMethod
     {
         public Take(Exp exp=null) : base(exp) { }
@@ -876,14 +899,15 @@ namespace CSharpSMCLtoPython.ASTbuilder
         }
     }
 
+
     internal class ReadInt : Exp
     {
-
         public override void Accept(ITreeNodeVisitor visitor)
         {
             visitor.Visit(this);
         }
     }
+
 
     internal class Open : Exp
     {
@@ -904,6 +928,7 @@ namespace CSharpSMCLtoPython.ASTbuilder
             visitor.Visit(this);
         }
     }
+
 
     internal class SString : Exp
     {
