@@ -30,7 +30,7 @@ take						{ return (int)Tokens.TAKE; }
 readInt\(\)					{ return (int)Tokens.READINT; }
 [a-zA-Z_][a-zA-Z_0-9]*\.	{ yylval.identifier=yytext; return (int)Tokens.IDDOT; }
 [a-zA-Z_][a-zA-Z_0-9]*		{ yylval.identifier=yytext; return (int)Tokens.ID; }
-["][a-zA-Z_0-9 ]*["]			    { yylval.identifier=yytext; return (int)Tokens.SSTRING; }
+\"[a-zA-Z_0-9 ]*\"	        { yylval.identifier=yytext; return (int)Tokens.SSTRING; }
 \&\&						{ return (int)Tokens.AND; }
 \|\|						{ return (int)Tokens.OR; }
 ==							{ return (int)Tokens.EQUAL; }

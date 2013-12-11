@@ -66,27 +66,19 @@ namespace CSharpSMCLtoPython.Visitors
     }
 
 
-    internal class PartEnv
+    internal abstract class PartEnv
     {
         public string PartName { get; private set; }
         public Dictionary<string, FuncEnv> Functions = new Dictionary<string, FuncEnv>(); // name -> env
         public Dictionary<string, SmclType> Tunnels;
         public Dictionary<string, PartEnv> Groups; // e.g. mills -> Millionaries
-
+        
         public readonly Multipart Mp;
 
-        public PartEnv(Multipart mp)
+        protected PartEnv(Multipart mp)
         {
             Mp = mp;
             PartName = mp.Name;
-            if (mp.GetType() == typeof(Server))
-            {
-                Groups = new Dictionary<string, PartEnv>();
-            }
-            if (mp.GetType() == typeof(Client))
-            {
-                Tunnels = new Dictionary<string, SmclType>();
-            }
         }
 
         public void Add(Function fun)
@@ -104,11 +96,17 @@ namespace CSharpSMCLtoPython.Visitors
             }
 
         }
+    }
+
+    internal class PartEnvClient : PartEnv
+    {
+        public PartEnvClient(Multipart mp) : base(mp)
+        {
+            Tunnels = new Dictionary<string, SmclType>();
+        }
 
         public void CheckTunnelMethod(string id, SmclType expType)
         {
-            if (Mp.GetType() != typeof(Client))
-                throw new TypeCheckingException("tunnel can be used only within client.");
             if (!Tunnels.ContainsKey(id))
                 throw new TypeCheckingException(id + " isn't defined as tunnel.");
 
@@ -120,8 +118,16 @@ namespace CSharpSMCLtoPython.Visitors
                         )
                 );
         }
-
     }
+
+    internal class PartEnvServer : PartEnv
+    {
+        public PartEnvServer(Multipart mp) : base(mp)
+        {
+            Groups = new Dictionary<string, PartEnv>();
+        }
+    }
+
 
 
     internal class Env
@@ -135,14 +141,14 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Add(Client c)
         {
-            PartEnv ce = new PartEnv(c);
+            PartEnv ce = new PartEnvClient(c);
             Clients.Add(ce);
             VisitPartEnv = ce;
         }
 
         public void Add(Server s)
         {
-            PartEnv ce = new PartEnv(s);
+            PartEnv ce = new PartEnvServer(s);
             Server = ce;
             VisitPartEnv = ce;
         }
@@ -452,6 +458,7 @@ namespace CSharpSMCLtoPython.Visitors
             {
                 s.Accept(this);
             }
+            _env.VisitFunName = null;
         }
 
         public void Visit(Else eelse)
@@ -663,7 +670,7 @@ namespace CSharpSMCLtoPython.Visitors
                 SmclType tmpt = _env.GetMyTypeFromId(id.Name);
 
                 if (!tmpt.IsSecret())
-                    throw new TypeCheckingException("open only on secret variables");
+                    throw new TypeCheckingException("open only on secret variables --> " + id.Name);
                 tmpt = ConvertToPublic(tmpt);
                 _env.VisitPartEnv.Functions[_env.VisitFunName].SymbolTable[id.Name] = tmpt;
             }
@@ -735,7 +742,7 @@ namespace CSharpSMCLtoPython.Visitors
                 tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType;
             else
                 tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType = _env.VisitPartEnv.Tunnels[tunMethodCall.Id.Name];
-            _env.VisitPartEnv.CheckTunnelMethod(tunMethodCall.Id.Name, tunMethodCall.TunMethod.SmclType);
+            ((PartEnvClient)_env.VisitPartEnv).CheckTunnelMethod(tunMethodCall.Id.Name, tunMethodCall.TunMethod.SmclType);
         }
     }
 }

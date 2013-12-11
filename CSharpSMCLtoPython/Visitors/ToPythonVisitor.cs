@@ -6,7 +6,7 @@ using CSharpSMCLtoPython.ASTbuilder;
 
 namespace CSharpSMCLtoPython.Visitors
 {
-    internal class ToStringVisitor : ITreeNodeVisitor {
+    internal class ToPythonVisitor : ITreeNodeVisitor {
         private readonly StringBuilder _sb = new StringBuilder();
         private int Level { get; set; }
 
@@ -62,14 +62,14 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(And and) 
         {
             and.Left.Accept(this);
-            _sb.Append(" && ");
+            _sb.Append(" and ");
             and.Right.Accept(this);
         }
 
         public void Visit(Or or)
         {
             or.Left.Accept(this);
-            _sb.Append(" || ");
+            _sb.Append(" or ");
             or.Right.Accept(this);
         }
 
@@ -112,7 +112,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Display print) 
         {
-            _sb.Append("display(");
+            _sb.Append("print(");
             print.Exp.Accept(this);
             _sb.Append(")");
         }
@@ -125,7 +125,7 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(If ifs) {
             _sb.Append("if (");
             ifs.Guard.Accept(this);
-            _sb.Append(")");
+            _sb.Append(") :");
             ifs.Body.Accept(this);
         }
 
@@ -133,14 +133,14 @@ namespace CSharpSMCLtoPython.Visitors
         {
             _sb.Append("while (");
             whiles.Guard.Accept(this);
-            _sb.Append(")");
+            _sb.Append(") :");
             whiles.Body.Accept(this);
 
         }
 
         public void Visit(Block block) 
         {
-            _sb.Append(" {");
+            //_sb.Append(" {");
             ++Level;
             foreach (var stmt in block.Statements)
             {
@@ -152,7 +152,7 @@ namespace CSharpSMCLtoPython.Visitors
             _sb.Append("\n");
             --Level;  
             Indent();
-            _sb.Append("}");
+            //_sb.Append("}");
                     
         }
 
@@ -170,7 +170,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Function function)
         {
-            _sb.AppendFormat("\n\nfunction {0} {1}(", function.SmclType, function.Name);
+            _sb.AppendFormat("\ndef " + function.Name + "(");
             if (function.Params.Any())
             {
                 foreach (Typed p in function.Params)
@@ -178,9 +178,9 @@ namespace CSharpSMCLtoPython.Visitors
                     p.Accept(this);
                     _sb.Append(", ");
                 }
-                _sb.Remove(_sb.Length - 2, 2);
+                _sb.Remove(_sb.Length-2, 2);
             }
-            _sb.Append(")\n{");
+            _sb.Append("):\n");
             ++Level;
             if (function.Stmts.Any())
             {
@@ -191,13 +191,13 @@ namespace CSharpSMCLtoPython.Visitors
                     s.Accept(this);
                 }
             }
-            _sb.Append("\n}\n");
+            _sb.Append("\n\n");
             --Level;
         }
 
         public void Visit(Else eelse)
         {
-            _sb.Append("else ");
+            _sb.Append("else: ");
             eelse.Body.Accept(this);
         }
 
@@ -213,7 +213,6 @@ namespace CSharpSMCLtoPython.Visitors
             assignment.Id.Accept(this);
             _sb.Append(" = ");
             assignment.Exp.Accept(this);
-            _sb.Append(";");
         }
 
         public void Visit(Tunnel tunnel)
@@ -228,7 +227,7 @@ namespace CSharpSMCLtoPython.Visitors
             foreach (var t in client.Tunnels)
             {
                 t.Accept(this);
-                _sb.Append(";\n\t");
+                _sb.Append("\n\t");
             }
             foreach (var f in client.Functions)
             {
@@ -242,7 +241,7 @@ namespace CSharpSMCLtoPython.Visitors
             foreach (var g in server.Groups)
             {
                 g.Accept(this);
-                _sb.Append(";\n\t");
+                _sb.Append("\n\t");
             }
             foreach (var f in server.Functions)
             {
@@ -252,11 +251,11 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(For ffor)
         {
-            _sb.Append("for ( ");
+            _sb.Append("for ");
             ffor.Typed.Accept(this);
             _sb.Append(" in ");
             ffor.Id.Accept(this);
-            _sb.Append(" )");
+            _sb.Append(":");
             ffor.Body.Accept(this);
         }
 
@@ -290,7 +289,6 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Declaration declaration)
         {
             declaration.Typed.Accept(this);
-            _sb.Append(";");
             if (declaration.Assignment != null)
             {
                 _sb.Append("\n");
@@ -308,7 +306,6 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(ExpStmt expStmt)
         {
             expStmt.Exp.Accept(this);
-            _sb.Append(";");
         }
 
         public void Visit(Take take)
@@ -336,7 +333,6 @@ namespace CSharpSMCLtoPython.Visitors
                 _sb.Append(" ");
                 rreturn.Exp.Accept(this);
             }
-            _sb.Append(";");
         }
 
         public void Visit(ReadInt readInt)
