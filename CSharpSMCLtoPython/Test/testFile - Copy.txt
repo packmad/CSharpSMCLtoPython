@@ -1,0 +1,71 @@
+declare client Millionaires:
+	tunnelof sint netWorth;
+	
+	function void ask() {
+		netWorth.put(readInt());
+	}
+	
+	function void tell(bool b) {
+		if (b) {
+			display("You are the richest");
+		}
+		else {
+			display("Make more money");
+		}
+	}
+	
+	function void main() {
+		ask();
+	}
+
+declare client pippo:
+	tunnelof sbool sb;
+	function void main() {
+		
+	}
+	
+declare server Max:
+	groupof Millionaires mills;
+	groupof pippo p;
+
+	function bool checkTypes(int one, sint two, client three, sclient four, bool five, sbool six) {
+		int i = 1;
+		sint si = 2;
+		client c;
+		sclient sc;
+		bool b = True;
+		sbool sb = False;
+		
+		si = i;
+		sc = c;
+		sb = b;
+		i = open(si|si);
+		c = open(sc|sc);
+		b = open(sb|sb);
+		
+		i = 3;
+		si = 4;
+		b = False;
+		sb = True;
+		
+
+	}
+	
+	function void main() {
+		sint max = 0;
+		sclient rich;
+		
+		client three;
+		
+		checkTypes(1, 2, three, three, True, False);
+		
+		for (client c in mills) {
+			sint netWorth = c.netWorth.get();
+			
+			if (netWorth > max) {
+				max = netWorth;
+				rich = c;
+			}
+		}
+
+	}

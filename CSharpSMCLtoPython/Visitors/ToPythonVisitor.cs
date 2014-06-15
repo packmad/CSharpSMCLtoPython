@@ -9,10 +9,41 @@ namespace CSharpSMCLtoPython.Visitors
     internal class ToPythonVisitor : ITreeNodeVisitor {
         private readonly StringBuilder _sb = new StringBuilder();
         private int Level { get; set; }
+        private bool _typeFlag;
 
         public string Result 
         {
-            get { return _sb.ToString(); }
+            get
+            {
+                const string runner =
+                    "parser = OptionParser()\n"+
+                    "Toft05Runtime.add_options(parser)\n"+
+                    "options, args = parser.parse_args()\n"+
+                    "if len(args) == 0:\n"+
+                    "\tparser.error(\"you must specify a config file\")\n"+
+                    "else:\n"+
+                    "\tid, players = load_config(args[0])\n"+
+                    "pre_runtime = create_runtime(id, players, 1, options, Toft05Runtime)\n"+
+                    "pre_runtime.addCallback(Protocol)\n"+
+                    "reactor.run()\n";
+                _sb.Append(runner);
+                return _sb.ToString();
+            }
+        }
+
+        public ToPythonVisitor()
+        {
+            const string imports =
+                "from optparse import OptionParser\n" +
+                "import viff.reactor\n" +
+                "viff.reactor.install()\n" +
+                "from twisted.internet import reactor\n" +
+                "from viff.field import GF\n" +
+                "from viff.runtime import create_runtime, gather_shares\n" +
+                "from viff.comparison import Toft05Runtime\n" +
+                "from viff.config import load_config\n" +
+                "from viff.util import rand, find_prime\n\n";
+            _sb.Append(imports);
         }
 
 
@@ -170,15 +201,19 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Function function)
         {
-            _sb.AppendFormat("\ndef " + function.Name + "(");
+            _sb.AppendFormat("\n");
+            Indent();
+            _sb.AppendFormat("def " + function.Name + "(");
             if (function.Params.Any())
             {
+                _typeFlag = true;
                 foreach (Typed p in function.Params)
                 {
                     p.Accept(this);
                     _sb.Append(", ");
                 }
                 _sb.Remove(_sb.Length-2, 2);
+                _typeFlag = false;
             }
             _sb.Append("):\n");
             ++Level;
@@ -203,9 +238,12 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Typed typed)
         {
+            /*
             _sb.Append(typed.SmclType);
             _sb.Append(" ");
-            typed.Id.Accept(this);
+             */
+            if (_typeFlag)
+                typed.Id.Accept(this);
         }
 
         public void Visit(Assignment assignment)
@@ -217,42 +255,51 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Tunnel tunnel)
         {
+            /* TODO
             _sb.Append("tunnel of ");
             tunnel.Typed.Accept(this);
+             */
         }
 
         public void Visit(Client client)
         {
-            _sb.Append("declare client "+client.Name+" : \n\t");
+            _sb.Append("#MULTIPART\nclass "+client.Name+" : \n\t");
+
             foreach (var t in client.Tunnels)
             {
                 t.Accept(this);
                 _sb.Append("\n\t");
             }
+            Level++;
             foreach (var f in client.Functions)
             {
                 f.Accept(this);
             }
+            Level--;
         }
 
         public void Visit(Server server)
         {
-            _sb.Append("declare server " + server.Name + " : \n\t");
+            _sb.Append("#MULTIPART\nclass " + server.Name + " : \n\t");
             foreach (var g in server.Groups)
             {
                 g.Accept(this);
                 _sb.Append("\n\t");
             }
+            Level++;
             foreach (var f in server.Functions)
             {
                 f.Accept(this);
             }
+            Level--;
         }
 
         public void Visit(For ffor)
         {
             _sb.Append("for ");
+            _typeFlag = true;
             ffor.Typed.Accept(this);
+            _typeFlag = false;
             _sb.Append(" in ");
             ffor.Id.Accept(this);
             _sb.Append(":");
@@ -261,6 +308,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(FunctionCall functionCall)
         {
+            Level++;
             _sb.Append(functionCall.Name).Append('(');
             if (functionCall.Params.Any())
             {
@@ -274,6 +322,7 @@ namespace CSharpSMCLtoPython.Visitors
             if (functionCall.Params.Count == 1)
                 _sb.Remove(_sb.Length - 2, 2);
             _sb.Append(')');
+            Level--;
         }
 
         public void Visit(BoolLiteral boolLiteral)
@@ -299,8 +348,10 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Group group)
         {
+            /* TODO
             _sb.Append("group of " + group.Name + " ");
             group.Id.Accept(this);
+             */
         }
 
         public void Visit(ExpStmt expStmt)
@@ -337,19 +388,21 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(ReadInt readInt)
         {
-            _sb.Append("readInt()");
+            _sb.Append("int(raw_input(\"readInt: \"))");
         }
 
         public void Visit(Open open)
         {
-            _sb.Append("open (");
+            //_sb.Append("open (");
             open.Exp.Accept(this);
+            /*
             _sb.Append(" | ");
             foreach (var a in open.Args)
             {
                 a.Accept(this);
             }
             _sb.Append(")");
+             */
         }
 
         public void Visit(MethodInvocation classDot)

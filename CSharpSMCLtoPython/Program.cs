@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.IO;
+using System.Linq;
 using CSharpSMCLtoPython.ASTbuilder;
 using CSharpSMCLtoPython.Visitors;
 
@@ -28,10 +30,32 @@ namespace CSharpSMCLtoPython {
                     var pyGen = new ToPythonVisitor();
                     parsedProgram.Accept(pyGen);
                     Console.WriteLine("PYTHON CODE:\n\n{0}\n", pyGen.Result);
-                    
-                    try {
-                        using (var sw = File.CreateText(@"pyGen.py"))
+
+                   
+                    try
+                    {
+                        /*
+                        var splitted = pyGen.Result.Split(new string[] { "#MULTIPART" }, StringSplitOptions.RemoveEmptyEntries);
+                        var last = splitted.Last();
+                        int i = 0;
+                        foreach (var s in splitted)
+                        {
+                            if (s.Equals(last))
+                            {
+                                using (var sw = File.CreateText(@"server.py"))
+                                    sw.Write(s);
+                            }
+                            else
+                            {
+                                using (var sw = File.CreateText(@"client" + (i++) + ".py"))
+                                    sw.Write(s);
+                            }
+                         }
+                         */
+
+                        using ( var sw = File.CreateText(@"output.py"))
                             sw.Write(pyGen.Result);
+
                     } catch (Exception e) {
                         Console.WriteLine("Cannot write output file; reason={0}", e.Message);
                     }
