@@ -1,8 +1,8 @@
-declare client Millionaires:
-	tunnelof sint netWorth;
+declare client Millionaires: # class Millionaires(Client)
+	tunnelof sint netWorth;  # self.tunnels["netWorth"] = Tunnel("netWorth", 0, True)
 	
-	function void ask() {
-		netWorth.put(readInt());
+	function void ask() { # def ask():
+		netWorth.put(readInt()); # self.tunnels["netWorth"].put(raw_input())
 	}
 	
 	function void tell(bool b) {
@@ -19,15 +19,23 @@ declare client Millionaires:
 	}
 
 declare client pippo:
-	tunnelof sbool sb;
+	tunnelof sbool sb; # self.tunnels["netWorth"] = Tunnel("sb", True, True)
 	function void main() {
 		
 	}
 	
-declare server Max:
-	groupof Millionaires mills;
-	groupof pippo p;
-
+declare client Impiegato:
+	tunnelof sint;
+	function void main() {
+		
+	}
+	
+declare server Max: # class Max(Server)	
+# init...
+	groupof Millionaires mills; # self.groups["mills"] = @listofMillionaires ip:port
+	groupof pippo p;	# self.groups["p"] = @listofp ip:port
+	groupof Impiegato imps;
+	
 	function bool checkTypes(int one, sint two, client three, sclient four, bool five, sbool six) {
 		int i = 1;
 		sint si = 2;
@@ -59,11 +67,11 @@ declare server Max:
 		
 		checkTypes(1, 2, three, three, True, False);
 		
-		for (client c in mills) {
-			sint netWorth = c.netWorth.get();
-			
-			if (netWorth > max) {
-				max = netWorth;
+		for (client c in mills) { # for (c in self.groups["mills"]):
+			sint nw = c.netWorth.get(); # nw = __tunnelCall(c, "netWorth", "get")
+			c.tell(True) # self.__remoteCall(c, "tell", True)
+			if (nw > max) {
+				max = nw;
 				rich = c;
 			}
 		}

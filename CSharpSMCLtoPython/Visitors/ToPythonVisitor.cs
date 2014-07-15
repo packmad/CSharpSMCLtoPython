@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using CSharpSMCLtoPython.ASTbuilder;
@@ -9,12 +11,25 @@ namespace CSharpSMCLtoPython.Visitors
     internal class ToPythonVisitor : ITreeNodeVisitor {
         private readonly StringBuilder _sb = new StringBuilder();
         private int Level { get; set; }
-        private bool _typeFlag;
+        private bool _typeFlag; // set it for don't print var type
+
+        private const string _separator =
+            "#-----------------------------------------------------------------------------#\n";
+        private string _className = "";
+        private readonly string _xmlConfigPath;
+        private readonly string _clientPySourcePath;
+        private readonly string _clientMainSourcePath;
+        private readonly string _serverPySourcePath;
+        private readonly string _serverMainSourcePath;
+        private readonly int _nPlayers;
+
 
         public string Result 
         {
             get
             {
+                //todo
+                /*
                 const string runner =
                     "parser = OptionParser()\n"+
                     "Toft05Runtime.add_options(parser)\n"+
@@ -27,23 +42,25 @@ namespace CSharpSMCLtoPython.Visitors
                     "pre_runtime.addCallback(Protocol)\n"+
                     "reactor.run()\n";
                 _sb.Append(runner);
+                 * */
                 return _sb.ToString();
             }
         }
 
-        public ToPythonVisitor()
+        public ToPythonVisitor(
+            int nPlayers, 
+            string xmlConfigPath, 
+            string clientPySourcePath, 
+            string clientMainSourcePath, 
+            string serverPySourcePath,
+            string serverMainSourcePath)
         {
-            const string imports =
-                "from optparse import OptionParser\n" +
-                "import viff.reactor\n" +
-                "viff.reactor.install()\n" +
-                "from twisted.internet import reactor\n" +
-                "from viff.field import GF\n" +
-                "from viff.runtime import create_runtime, gather_shares\n" +
-                "from viff.comparison import Toft05Runtime\n" +
-                "from viff.config import load_config\n" +
-                "from viff.util import rand, find_prime\n\n";
-            _sb.Append(imports);
+            _nPlayers = nPlayers;
+            _xmlConfigPath = xmlConfigPath;
+            _clientPySourcePath = clientPySourcePath;
+            _clientMainSourcePath = clientMainSourcePath;
+            _serverPySourcePath = serverPySourcePath;
+            _serverMainSourcePath = serverMainSourcePath;
         }
 
 
@@ -106,7 +123,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Not not) 
         {
-            _sb.Append("~");
+            _sb.Append(" not ");
             not.Operand.Accept(this);
         }
 
@@ -187,15 +204,82 @@ namespace CSharpSMCLtoPython.Visitors
                     
         }
 
+        private void appendClientPyMain()
+        {
+            _sb.Append("xmlConfigPath = '" + _xmlConfigPath + "'\n");
+            try
+            {
+                using (StreamReader sr = new StreamReader(_clientMainSourcePath))
+                {
+                    _sb.Append(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The client's python main file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private void appendServerPyMain()
+        {
+            _sb.Append("xmlConfigPath = '" + _xmlConfigPath + "'\n");
+            try
+            {
+                using (StreamReader sr = new StreamReader(_serverMainSourcePath))
+                {
+                    _sb.Append(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The server's python main file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
 
         public void Visit(Prog prog) 
         {
+            try
+            {
+                using (StreamReader sr = new StreamReader(_clientPySourcePath))
+                {
+                    _sb.Append(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The client python support file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+            _sb.Append("#BEGIN AUTO-GEN CLASS FOR CLIENT\n" + _separator);
+
             foreach (var c in prog.Clients)
             {
                 c.Accept(this);
                 _sb.Append("\n\n");
             }
+            _sb.Append(_separator + "#END AUTO-GEN CLASS FOR CLIENT\n\n");
+
+            appendClientPyMain();
+            _sb.Append("\n\n#ENDOFCLIENTSDEF\n\n");
+            try
+            {
+                using (StreamReader sr = new StreamReader(_serverPySourcePath))
+                {
+                    _sb.Append(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The server python support file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+            _sb.Append("#BEGIN AUTO-GEN CLASS FOR SERVER\n" + _separator);
             prog.Server.Accept(this);
+            _sb.Append(_separator + "#END AUTO-GEN CLASS FOR SERVER\n\n");
+            appendServerPyMain();
         }
 
 
@@ -203,9 +287,10 @@ namespace CSharpSMCLtoPython.Visitors
         {
             _sb.AppendFormat("\n");
             Indent();
-            _sb.AppendFormat("def " + function.Name + "(");
+            _sb.AppendFormat("def " + function.Name + "(self");
             if (function.Params.Any())
             {
+                _sb.AppendFormat(", ");
                 _typeFlag = true;
                 foreach (Typed p in function.Params)
                 {
@@ -255,22 +340,37 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Tunnel tunnel)
         {
-            /* TODO
-            _sb.Append("tunnel of ");
-            tunnel.Typed.Accept(this);
-             */
+            _sb.Append("self.addTunnel(Tunnel('" + tunnel.Typed.Id);
+            switch (tunnel.Typed.SmclType.SmclT)
+            {
+                case SmclT.IntT:
+                case SmclT.SintT:
+                    _sb.Append("', 0))");
+                    break;
+                case SmclT.BoolT:
+                case SmclT.SboolT:
+                    _sb.Append("', False))");
+                    break;
+                default:
+                    throw new Exception("Visitor logic fails.");
+            }
         }
 
         public void Visit(Client client)
         {
-            _sb.Append("#MULTIPART\nclass "+client.Name+" : \n\t");
+            _className = client.Name;
+            _sb.Append("class " + _className + "(Client): \n\t");
+            _sb.Append("def __init__(self, cliAddr, srvAddr):\n\t\t");
+            _sb.Append("super(" + _className + ", self).__init__(cliAddr, srvAddr)\n\n");
 
             foreach (var t in client.Tunnels)
             {
                 t.Accept(this);
-                _sb.Append("\n\t");
+                //_sb.Append("\n\t");
             }
             Level++;
+
+
             foreach (var f in client.Functions)
             {
                 f.Accept(this);
@@ -280,12 +380,21 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Server server)
         {
-            _sb.Append("#MULTIPART\nclass " + server.Name + " : \n\t");
+            _className = server.Name;
+            _sb.Append("class " + _className + "(Server): \n\t");
+            _sb.Append("def __init__(self, srvAddr):\n\t");
+            _sb.Append("gpl = ["); //TODO
+
             foreach (var g in server.Groups)
             {
                 g.Accept(this);
-                _sb.Append("\n\t");
+                _sb.Append(", ");
             }
+            _sb.Remove(_sb.Length - 2, 2);
+            _sb.Append("]\nn\tPlayers = " + _nPlayers);
+            _sb.Append("super(" + _className + ", self).__init__(srvAddr, gpl, xmlConfigPath, nPlayers)\n\n");
+
+
             Level++;
             foreach (var f in server.Functions)
             {
@@ -348,10 +457,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Group group)
         {
-            /* TODO
-            _sb.Append("group of " + group.Name + " ");
-            group.Id.Accept(this);
-             */
+            _sb.Append("('" + group.Name + "', '" + group.Id.Name + "')");
         }
 
         public void Visit(ExpStmt expStmt)

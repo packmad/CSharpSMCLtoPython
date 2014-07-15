@@ -2,7 +2,7 @@
 
 namespace CSharpSMCLtoPython.ASTbuilder
 {
-    internal enum SmclT // now useless, but in future...
+    internal enum SmclT
     {
         NoneT,
         IntT,

@@ -5,9 +5,16 @@ declare client Millionaires:
 		netWorth.put(readInt());
 	}
 	
+	function void test(bool m) {
+		
+	}
+
 	function void main() {
 		ask();
 	}
+
+
+
 	
 declare server Max:
 	groupof Millionaires mills;
