@@ -30,7 +30,6 @@ namespace CSharpSMCLtoPython {
                     Console.WriteLine("TYPE-CHECKED PROG:\n\n{0}\n", toStringVisitor.Result);
 
                     var pyGen = new ToPythonVisitor(
-                        1,
                         pythonSourcePath + "smcxmlconfig.xml",
                         pythonSourcePath + "supportFileForClient.py",
                         pythonSourcePath + "mainFileForClient.py",
@@ -38,33 +37,33 @@ namespace CSharpSMCLtoPython {
                         pythonSourcePath + "mainFileForServer.py"
                         );
                     parsedProgram.Accept(pyGen);
-                    Console.WriteLine("PYTHON CODE:\n\n{0}\n", pyGen.Result);
+                    //Console.WriteLine("PYTHON CODE:\n\n{0}\n", pyGen.Result);
 
                    
                     try
                     {
-                        /*
-                        var splitted = pyGen.Result.Split(new string[] { "#SEPARATOR" }, StringSplitOptions.RemoveEmptyEntries);
+
+                        var splitted = pyGen.Result.Split(new string[] { "#ENDOFCLIENTSDEF" }, StringSplitOptions.RemoveEmptyEntries);
                         var last = splitted.Last();
-                        int i = 0;
+                        //int i = 0;
                         foreach (var s in splitted)
                         {
                             if (s.Equals(last))
                             {
-                                using (var sw = File.CreateText(@"server.py"))
+                                using (var sw = File.CreateText(pythonSourcePath + @"smclServer.py"))
                                     sw.Write(s);
                             }
                             else
                             {
-                                using (var sw = File.CreateText(@"client" + (i++) + ".py"))
+                                using (var sw = File.CreateText(pythonSourcePath + @"smclClient" + ".py"))
                                     sw.Write(s);
                             }
                          }
-                         */
-
+                         
+                        /*
                         using ( var sw = File.CreateText(@"output.py"))
                             sw.Write(pyGen.Result);
-
+                        */
                     } catch (Exception e) {
                         Console.WriteLine("Cannot write output file; reason={0}", e.Message);
                     }

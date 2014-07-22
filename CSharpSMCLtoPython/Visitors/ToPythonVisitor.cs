@@ -11,8 +11,6 @@ namespace CSharpSMCLtoPython.Visitors
     internal class ToPythonVisitor : ITreeNodeVisitor {
         private readonly StringBuilder _sb = new StringBuilder();
         private int Level { get; set; }
-        private bool _typeFlag; // set it for don't print var type
-
         private const string _separator =
             "#-----------------------------------------------------------------------------#\n";
         private string _className = "";
@@ -21,41 +19,25 @@ namespace CSharpSMCLtoPython.Visitors
         private readonly string _clientMainSourcePath;
         private readonly string _serverPySourcePath;
         private readonly string _serverMainSourcePath;
-        private readonly int _nPlayers;
-
+        private bool _visitingServer = false;
+        private bool _methInvocation = false;
+        private bool _noTypeFlag; // set it for don't print var type
 
         public string Result 
         {
             get
             {
-                //todo
-                /*
-                const string runner =
-                    "parser = OptionParser()\n"+
-                    "Toft05Runtime.add_options(parser)\n"+
-                    "options, args = parser.parse_args()\n"+
-                    "if len(args) == 0:\n"+
-                    "\tparser.error(\"you must specify a config file\")\n"+
-                    "else:\n"+
-                    "\tid, players = load_config(args[0])\n"+
-                    "pre_runtime = create_runtime(id, players, 1, options, Toft05Runtime)\n"+
-                    "pre_runtime.addCallback(Protocol)\n"+
-                    "reactor.run()\n";
-                _sb.Append(runner);
-                 * */
                 return _sb.ToString();
             }
         }
 
         public ToPythonVisitor(
-            int nPlayers, 
             string xmlConfigPath, 
             string clientPySourcePath, 
             string clientMainSourcePath, 
             string serverPySourcePath,
             string serverMainSourcePath)
         {
-            _nPlayers = nPlayers;
             _xmlConfigPath = xmlConfigPath;
             _clientPySourcePath = clientPySourcePath;
             _clientMainSourcePath = clientMainSourcePath;
@@ -68,7 +50,7 @@ namespace CSharpSMCLtoPython.Visitors
         {
             for (int i=0; i<Level; i++)
             {
-                _sb.Append("\t");
+                _sb.Append("    ");
             }
         }
 
@@ -131,11 +113,12 @@ namespace CSharpSMCLtoPython.Visitors
         {
             eq.Left.Accept(this);
             _sb.Append("==");
-            //if (eq.SmclType != null) {
-                Debug.Assert(eq.Left.SmclType.Equals(eq.Right.SmclType));
+            _noTypeFlag = true;
+            Debug.Assert(eq.Left.SmclType.Equals(eq.Right.SmclType));
+            if (!_noTypeFlag)
                 _sb.Append(eq.Left.SmclType).Append(' ');
-            //}
             eq.Right.Accept(this);
+            _noTypeFlag = false;
         }
 
         public void Visit(GreaterThan gt)
@@ -206,7 +189,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         private void appendClientPyMain()
         {
-            _sb.Append("xmlConfigPath = '" + _xmlConfigPath + "'\n");
+            _sb.Append("xmlConfigPath = r'" + _xmlConfigPath + "'\n");
             try
             {
                 using (StreamReader sr = new StreamReader(_clientMainSourcePath))
@@ -223,7 +206,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         private void appendServerPyMain()
         {
-            _sb.Append("xmlConfigPath = '" + _xmlConfigPath + "'\n");
+            _sb.Append("xmlConfigPath = r'" + _xmlConfigPath + "'\n");
             try
             {
                 using (StreamReader sr = new StreamReader(_serverMainSourcePath))
@@ -277,6 +260,7 @@ namespace CSharpSMCLtoPython.Visitors
                 Console.WriteLine(e.Message);
             }
             _sb.Append("#BEGIN AUTO-GEN CLASS FOR SERVER\n" + _separator);
+            _visitingServer = true;
             prog.Server.Accept(this);
             _sb.Append(_separator + "#END AUTO-GEN CLASS FOR SERVER\n\n");
             appendServerPyMain();
@@ -291,16 +275,16 @@ namespace CSharpSMCLtoPython.Visitors
             if (function.Params.Any())
             {
                 _sb.AppendFormat(", ");
-                _typeFlag = true;
+                _noTypeFlag = true;
                 foreach (Typed p in function.Params)
                 {
                     p.Accept(this);
                     _sb.Append(", ");
                 }
                 _sb.Remove(_sb.Length-2, 2);
-                _typeFlag = false;
+                _noTypeFlag = false;
             }
-            _sb.Append("):\n");
+            _sb.Append("):");
             ++Level;
             if (function.Stmts.Any())
             {
@@ -311,7 +295,9 @@ namespace CSharpSMCLtoPython.Visitors
                     s.Accept(this);
                 }
             }
-            _sb.Append("\n\n");
+            _sb.Append("\n");
+            Indent();
+            _sb.Append("pass\n");
             --Level;
         }
 
@@ -323,18 +309,15 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Typed typed)
         {
-            /*
-            _sb.Append(typed.SmclType);
-            _sb.Append(" ");
-             */
-            if (_typeFlag)
-                typed.Id.Accept(this);
+            //if (_noTypeFlag)
+            typed.Id.Accept(this);
         }
 
         public void Visit(Assignment assignment)
         {
             assignment.Id.Accept(this);
             _sb.Append(" = ");
+            _noTypeFlag = true;
             assignment.Exp.Accept(this);
         }
 
@@ -354,21 +337,28 @@ namespace CSharpSMCLtoPython.Visitors
                 default:
                     throw new Exception("Visitor logic fails.");
             }
+            _sb.Append("\n");
         }
 
         public void Visit(Client client)
         {
             _className = client.Name;
-            _sb.Append("class " + _className + "(Client): \n\t");
-            _sb.Append("def __init__(self, cliAddr, srvAddr):\n\t\t");
-            _sb.Append("super(" + _className + ", self).__init__(cliAddr, srvAddr)\n\n");
+            _sb.Append("class " + _className + "(Client): \n");
+            Level++;
+            Indent();
+            _sb.Append("def __init__(self, cliAddr, srvAddr):\n");
+            Level++;
+            Indent(); 
+            _sb.Append("super(" + _className + ", self).__init__(cliAddr, srvAddr)\n");
+
 
             foreach (var t in client.Tunnels)
             {
+                Indent();
                 t.Accept(this);
                 //_sb.Append("\n\t");
             }
-            Level++;
+            Level--;
 
 
             foreach (var f in client.Functions)
@@ -381,9 +371,13 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Server server)
         {
             _className = server.Name;
-            _sb.Append("class " + _className + "(Server): \n\t");
-            _sb.Append("def __init__(self, srvAddr):\n\t");
-            _sb.Append("gpl = ["); //TODO
+            _sb.Append("class " + _className + "(Server): \n");
+            ++Level;
+            Indent();
+            _sb.Append("def __init__(self, srvAddr, nPlayers, xmlConfigPath):\n");
+            ++Level;
+            Indent();
+            _sb.Append("gpl = [");
 
             foreach (var g in server.Groups)
             {
@@ -391,67 +385,99 @@ namespace CSharpSMCLtoPython.Visitors
                 _sb.Append(", ");
             }
             _sb.Remove(_sb.Length - 2, 2);
-            _sb.Append("]\nn\tPlayers = " + _nPlayers);
-            _sb.Append("super(" + _className + ", self).__init__(srvAddr, gpl, xmlConfigPath, nPlayers)\n\n");
-
-
-            Level++;
+            _sb.Append("]\n");
+            Indent();
+            _sb.Append("super(" + _className + ", self).__init__(srvAddr, gpl, xmlConfigPath, nPlayers)\n");
+            --Level;
             foreach (var f in server.Functions)
             {
                 f.Accept(this);
             }
-            Level--;
+            --Level;
         }
 
         public void Visit(For ffor)
         {
             _sb.Append("for ");
-            _typeFlag = true;
+            _noTypeFlag = true;
             ffor.Typed.Accept(this);
-            _typeFlag = false;
-            _sb.Append(" in ");
+            _noTypeFlag = false;
+            _sb.Append(" in self.groups['");
             ffor.Id.Accept(this);
-            _sb.Append(":");
+            _sb.Append("']:");
             ffor.Body.Accept(this);
         }
 
         public void Visit(FunctionCall functionCall)
         {
             Level++;
-            _sb.Append(functionCall.Name).Append('(');
-            if (functionCall.Params.Any())
+
+
+            if (!_methInvocation)
             {
-                foreach (Exp arg in functionCall.Params)
-                {
-                    arg.Accept(this);
-                    _sb.Append(", ");
-                }
-                _sb.Remove(_sb.Length - 2, 2);
+                _sb.Append("self.");
             }
-            if (functionCall.Params.Count == 1)
-                _sb.Remove(_sb.Length - 2, 2);
-            _sb.Append(')');
+            if (_methInvocation &&_visitingServer)
+            {
+                _noTypeFlag = false;
+                _sb.Append("remoteMethodCall('" + functionCall.Name + ",");
+
+                if (functionCall.Params.Any())
+                {
+                    foreach (Exp arg in functionCall.Params)
+                    {
+                        arg.Accept(this);
+                        _sb.Append(",");
+                    }
+                }
+                _sb.Append("')");
+            }
+            else
+            {
+                _sb.Append(functionCall.Name).Append('(');
+                if (functionCall.Params.Any())
+                {
+                    foreach (Exp arg in functionCall.Params)
+                    {
+                        arg.Accept(this);
+                        _sb.Append(", ");
+                    }
+                    _sb.Remove(_sb.Length - 2, 2);
+                }
+                if (functionCall.Params.Count == 1)
+                    _sb.Remove(_sb.Length - 2, 2);
+                _sb.Append(')');
+            }
+
             Level--;
         }
 
         public void Visit(BoolLiteral boolLiteral)
         {
+            if (!_noTypeFlag)
+                _sb.Append(boolLiteral.SmclType + " ");
             _sb.Append(boolLiteral.Value);
         }
 
         public void Visit(IntLiteral intLiteral)
         {
+            if (!_noTypeFlag)
+                _sb.Append(intLiteral.SmclType + " ");
             _sb.Append(intLiteral.Value);
         }
 
         public void Visit(Declaration declaration)
         {
-            declaration.Typed.Accept(this);
             if (declaration.Assignment != null)
             {
                 _sb.Append("\n");
                 Indent();
                 declaration.Assignment.Accept(this);
+            }
+            else
+            {
+                declaration.Typed.Accept(this);
+                _sb.Append(" = None\n");
             }
         }
 
@@ -467,17 +493,17 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(Take take)
         {
-            _sb.Append(".take()");
+            _sb.Append(_visitingServer ? "take" : "take()");
         }
 
         public void Visit(Get get)
         {
-            _sb.Append(".get()");
+            _sb.Append(_visitingServer ? "get" : "get()");
         }
 
         public void Visit(Put put)
         {
-            _sb.Append(".put(");
+            _sb.Append("put(");
             put.Exp.Accept(this);
             _sb.Append(")");
         }
@@ -494,7 +520,7 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(ReadInt readInt)
         {
-            _sb.Append("int(raw_input(\"readInt: \"))");
+            _sb.Append("int(input(\"readInt: \"))");
         }
 
         public void Visit(Open open)
@@ -513,9 +539,11 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(MethodInvocation classDot)
         {
+            _methInvocation = true;
             classDot.Id.Accept(this);
             _sb.Append(".");
             classDot.FunctionCall.Accept(this);
+            _methInvocation = false;
         }
 
         public void Visit(SString sstring)
@@ -531,8 +559,23 @@ namespace CSharpSMCLtoPython.Visitors
 
         public void Visit(TunMethodCall tunMethodCall)
         {
-            tunMethodCall.Id.Accept(this);
-            tunMethodCall.TunMethod.Accept(this);
+            if (_visitingServer)
+            {
+                _sb.Append("remoteTunnelMethod('");
+                tunMethodCall.Id.Accept(this);
+                _sb.Append("', '");
+                tunMethodCall.TunMethod.Accept(this);
+                _sb.Append("')");
+            }
+            else
+            {
+                _sb.Append("self.tunnels['");
+                tunMethodCall.Id.Accept(this);
+                _sb.Append("'].");
+                tunMethodCall.TunMethod.Accept(this);
+                //.Append("()\n");
+            }
+            
         }
     }
 }

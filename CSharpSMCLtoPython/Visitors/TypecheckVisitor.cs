@@ -138,6 +138,7 @@ namespace CSharpSMCLtoPython.Visitors
         public PartEnv VisitPartEnv { get; set; }
         public PartEnv InvokingOn { get; set; } // used for method invocation
         public string VisitFunName { get; set; }
+        public bool FakeEnvForTunnel { get; set; } // set when is visiting server but env is changed for typecheck
 
         public void Add(Client c)
         {
@@ -406,10 +407,12 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(Display print)
         {
             print.Exp.Accept(this);
+            /*
             if (!print.Exp.SmclType.Equals(StringType))
             {
                 throw new TypeCheckingException("You can only print strings, not " + print.Exp.SmclType);
             }
+             */
         }
 
         public void Visit(EvalExp eval)
@@ -725,8 +728,10 @@ namespace CSharpSMCLtoPython.Visitors
                 {
                     PartEnv tmp = _env.VisitPartEnv;
                     _env.VisitPartEnv = c;
+                    _env.FakeEnvForTunnel = true;
                     dotClient.TunMethodCall.Accept(this);
                     _env.VisitPartEnv = tmp;
+                    _env.FakeEnvForTunnel = false;
                     dotClient.SmclType = dotClient.TunMethodCall.TunMethod.SmclType;
                     return;
                 }
@@ -738,10 +743,16 @@ namespace CSharpSMCLtoPython.Visitors
         public void Visit(TunMethodCall tunMethodCall)
         {
             tunMethodCall.TunMethod.Accept(this);
-            if (tunMethodCall.TunMethod.GetType() == typeof(Put))
+            if (tunMethodCall.TunMethod.GetType() == typeof (Put))
+            {
+                if (_env.FakeEnvForTunnel)
+                    throw new TypeCheckingException(
+                        "Tunnels are mono-directional: you can't use the put(...) method within server");
                 tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType;
+            }
             else
-                tunMethodCall.SmclType = tunMethodCall.TunMethod.SmclType = _env.VisitPartEnv.Tunnels[tunMethodCall.Id.Name];
+                tunMethodCall.SmclType =
+                    tunMethodCall.TunMethod.SmclType = _env.VisitPartEnv.Tunnels[tunMethodCall.Id.Name];
             ((PartEnvClient)_env.VisitPartEnv).CheckTunnelMethod(tunMethodCall.Id.Name, tunMethodCall.TunMethod.SmclType);
         }
     }
