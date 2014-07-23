@@ -1,11 +1,8 @@
+#-----------------------------------------------------------------------------#
 #BEGIN SUPPORT CLASSES FOR CLIENT
 #-----------------------------------------------------------------------------#
-import re, sys
-sys.path.append('C:\\Users\\Simone\\workspace\\SMCLpy')
-sys.path.append('C:\\Users\\Simone\\workspace\\SMCLpy\\smcl')
-from smcl.easyTcpSocket import EasyTcpSocket
+import re
 import xml.etree.ElementTree as etree
-
 #-----------------------------------------------------------------------------#
 
 class Tunnel():

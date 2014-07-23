@@ -19,13 +19,15 @@ namespace CSharpSMCLtoPython {
 
         private static void Main(string[] args)
         {
+            //Console.WriteLine(Directory.GetCurrentDirectory());
             if (args.Length != 1)
             {
                 Console.WriteLine(Usage());
                 Console.ReadLine();
                 return;
             }
-            string pythonSourcePath = "C:\\Users\\Simone\\workspace\\SMCLpy\\smcl\\";
+            string pythonSourcePath = "..\\..\\PySources\\";
+            string outputPath = "C:\\Users\\Simone\\workspace\\SMCLpy\\smcl\\";
             FileStream stream = new FileStream(args[0], FileMode.Open);
 
             Console.SetWindowSize(80,62);
@@ -46,7 +48,8 @@ namespace CSharpSMCLtoPython {
                         pythonSourcePath + "supportFileForClient.py",
                         pythonSourcePath + "mainFileForClient.py",
                         pythonSourcePath + "supportFileForServer.py",
-                        pythonSourcePath + "mainFileForServer.py"
+                        pythonSourcePath + "mainFileForServer.py",
+                        pythonSourcePath + "easyTcpSocket.py"
                         );
                     parsedProgram.Accept(pyGen);
                     //Console.WriteLine("PYTHON CODE:\n\n{0}\n", pyGen.Result);
@@ -62,26 +65,24 @@ namespace CSharpSMCLtoPython {
                         {
                             if (s.Equals(last))
                             {
-                                using (var sw = File.CreateText(pythonSourcePath + @"smclServer.py"))
+                                using (var sw = File.CreateText(outputPath + @"smclServer.py"))
                                     sw.Write(s);
                             }
                             else
                             {
-                                using (var sw = File.CreateText(pythonSourcePath + @"smclClient" + ".py"))
+                                using (var sw = File.CreateText(outputPath + @"smclClient" + ".py"))
                                     sw.Write(s);
                             }
                          }
                     } catch (Exception e) {
                         Console.WriteLine("Cannot write output file; reason={0}", e.Message);
-                        Console.ReadLine();
                     }
 
                 } catch (TypeCheckingException e) {
                     Console.WriteLine("Typechecking error:\n{0}", e.Message);
-                    Console.ReadLine();
                 }
             }
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

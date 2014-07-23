@@ -19,6 +19,7 @@ namespace CSharpSMCLtoPython.Visitors
         private readonly string _clientMainSourcePath;
         private readonly string _serverPySourcePath;
         private readonly string _serverMainSourcePath;
+        private readonly string _easyTcpSocketPath;
         private bool _visitingServer = false;
         private bool _methInvocation = false;
         private bool _noTypeFlag; // set it for don't print var type
@@ -32,17 +33,20 @@ namespace CSharpSMCLtoPython.Visitors
         }
 
         public ToPythonVisitor(
-            string xmlConfigPath, 
-            string clientPySourcePath, 
-            string clientMainSourcePath, 
+            string xmlConfigPath,
+            string clientPySourcePath,
+            string clientMainSourcePath,
             string serverPySourcePath,
-            string serverMainSourcePath)
+            string serverMainSourcePath,
+            string easyTcpSocketPath
+            )
         {
             _xmlConfigPath = xmlConfigPath;
             _clientPySourcePath = clientPySourcePath;
             _clientMainSourcePath = clientMainSourcePath;
             _serverPySourcePath = serverPySourcePath;
             _serverMainSourcePath = serverMainSourcePath;
+            _easyTcpSocketPath = easyTcpSocketPath;
         }
 
 
@@ -221,9 +225,25 @@ namespace CSharpSMCLtoPython.Visitors
             }
         }
 
-
-        public void Visit(Prog prog) 
+        private void appendSocketLibrary()
         {
+            try
+            {
+                using (StreamReader sr = new StreamReader(_easyTcpSocketPath))
+                {
+                    _sb.Append(sr.ReadToEnd());
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The easyTcpSocket file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public void Visit(Prog prog)
+        {
+            appendSocketLibrary();
             try
             {
                 using (StreamReader sr = new StreamReader(_clientPySourcePath))
@@ -247,6 +267,7 @@ namespace CSharpSMCLtoPython.Visitors
 
             appendClientPyMain();
             _sb.Append("\n\n#ENDOFCLIENTSDEF\n\n");
+            appendSocketLibrary();
             try
             {
                 using (StreamReader sr = new StreamReader(_serverPySourcePath))
