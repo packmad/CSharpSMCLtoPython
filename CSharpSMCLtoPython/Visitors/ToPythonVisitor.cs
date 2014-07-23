@@ -281,7 +281,7 @@ namespace CSharpSMCLtoPython.Visitors
                     p.Accept(this);
                     _sb.Append(", ");
                 }
-                _sb.Remove(_sb.Length-2, 2);
+                _sb.Remove(_sb.Length - 2, 2);
                 _noTypeFlag = false;
             }
             _sb.Append("):");

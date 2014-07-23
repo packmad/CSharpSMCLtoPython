@@ -8,13 +8,25 @@ using CSharpSMCLtoPython.Visitors;
 namespace CSharpSMCLtoPython {
 
     internal class Program {
-        
+
+        private static string Usage()
+        {
+            return
+                "Usage:\n" +
+                AppDomain.CurrentDomain.FriendlyName + " sourceFile.smcl \n" +
+                "\nIt generates two files: smclClient.py and smclServer.py";
+        }
+
         private static void Main(string[] args)
         {
-            //var stream = args.Length > 0 ? new FileStream(args[0], FileMode.Open) : Console.OpenStandardInput();
+            if (args.Length != 1)
+            {
+                Console.WriteLine(Usage());
+                Console.ReadLine();
+                return;
+            }
             string pythonSourcePath = "C:\\Users\\Simone\\workspace\\SMCLpy\\smcl\\";
-            FileStream stream = new FileStream("C:\\Users\\Simone\\Documents\\GitHub\\CSharpSMCLtoPython\\CSharpSMCLtoPython\\Test\\testFile.txt", FileMode.Open);
-
+            FileStream stream = new FileStream(args[0], FileMode.Open);
 
             Console.SetWindowSize(80,62);
             var parser = new Parser(new Scanner(stream));
@@ -27,7 +39,7 @@ namespace CSharpSMCLtoPython {
                     
                     var toStringVisitor = new ToStringVisitor();
                     parsedProgram.Accept(toStringVisitor);
-                    Console.WriteLine("TYPE-CHECKED PROG:\n\n{0}\n", toStringVisitor.Result);
+                    //Console.WriteLine("TYPE-CHECKED PROG:\n\n{0}\n", toStringVisitor.Result);
 
                     var pyGen = new ToPythonVisitor(
                         pythonSourcePath + "smcxmlconfig.xml",
@@ -59,23 +71,17 @@ namespace CSharpSMCLtoPython {
                                     sw.Write(s);
                             }
                          }
-                         
-                        /*
-                        using ( var sw = File.CreateText(@"output.py"))
-                            sw.Write(pyGen.Result);
-                        */
                     } catch (Exception e) {
                         Console.WriteLine("Cannot write output file; reason={0}", e.Message);
+                        Console.ReadLine();
                     }
 
                 } catch (TypeCheckingException e) {
                     Console.WriteLine("Typechecking error:\n{0}", e.Message);
+                    Console.ReadLine();
                 }
             }
-
-            Console.ReadLine();
+            //Console.ReadLine();
         }
     }
 }
-
-//EOF
