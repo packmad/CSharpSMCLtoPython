@@ -24,6 +24,7 @@ In the xml file you need to specify:
 For each entry you implicitly defines the number of participants.
 
 For example:
+
 		<?xml version='1.0' encoding='utf-8'?>
 		<smcxml>
 			<player id='0' name='Max' host='127.0.0.1' port='1337'/>
@@ -34,15 +35,17 @@ For example:
 ###How it works
 It need 3 command line arguments:
 
-./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml
+*./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml*
 
 and it generates two files: *smclClient.py* and *smclServer.py* in *outputFolder*.
 
-Run the server first without arguments.
+First: run the server  without arguments.
+
+*python smclServer.py*
 
 Then run the clients specifying the numeric id (relative to the xml configuration).
 		
-python smclClient.py *id*
+*python smclClient.py [0-9]+*
 
 
 ###Language details
