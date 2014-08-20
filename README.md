@@ -2,7 +2,9 @@
 
 ###Brief description
 This is a translator from [Secure Multiparty Computation Language (SMCL)] (http://www.brics.dk/SMCL/papers/smcl-plas07.pdf) to Python.
+
 Clarification: I'm using a subset of the language described in the paper, see the language details.
+
 It was developed for educational purposes as the final project for the Implementation of Programming Languages 2013/2014 University of Genoa course.
 
 ###Tools
@@ -21,16 +23,25 @@ In the xml file you need to specify:
 
 For each entry you implicitly defines the number of participants.
 
+For example:
 		<?xml version='1.0' encoding='utf-8'?>
 		<smcxml>
-			<player id='0' name='Max' host='127.0.0.1' port='5555'/>
+			<player id='0' name='Max' host='127.0.0.1' port='1337'/>
 			<player id='1' name='Millionaires' host='127.0.0.1' port='1234'/>
-			<player id='2' name='Employees' host='127.0.0.1' port='1238'/>
+			<player id='2' name='Employees' host='127.0.0.1' port='1235'/>
 		</smcxml>
 
 ###How it works
 It need 3 command line arguments:
-./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml
+
+		./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml
 
 and it generates two files: *smclClient.py* and *smclServer.py* in *outputFolder*.
+
+Run the server first without arguments.
+
+Then run the clients specifying the numeric id (relative to the xml configuration).
+		python smclClient.py *id*
+
+
 

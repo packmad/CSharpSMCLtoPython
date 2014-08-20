@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <smcxml>
-	<player id='0' name='Max' host='127.0.0.1' port='5555'/>
+	<player id='0' name='Max' host='127.0.0.1' port='1337'/>
 	<player id='1' name='Millionaires' host='127.0.0.1' port='1234'/>
-	<player id='2' name='Employees' host='127.0.0.1' port='1238'/>
+	<player id='2' name='Employees' host='127.0.0.1' port='1235'/>
 </smcxml>
