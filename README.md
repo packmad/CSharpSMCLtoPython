@@ -9,8 +9,8 @@ It was developed for educational purposes as the final project for the Implement
 
 ###Tools
 The project was developed using:
-- [GPLEX] (https://gplex.codeplex.com/) to generate the scanner
-- [GPPG] (https://gppg.codeplex.com/) to generate the parser
+- [GPLEX] (https://gplex.codeplex.com/) to generate the scanner using the LEX specification language
+- [GPPG] (https://gppg.codeplex.com/) to generate the parser using YACC-like syntax
 - [Visual Studio 2013] (http://www.visualstudio.com/) as IDE for the translator
 - [ReSharper] (http://www.jetbrains.com/resharper/) as holy hand!
 - [Eclipse] (https://www.eclipse.org/) Kepler with [PyDev] (http://pydev.org/) plugin for debug the Python generated code
@@ -34,14 +34,28 @@ For example:
 ###How it works
 It need 3 command line arguments:
 
-		./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml
+./CSharpSMCLtoPython.exe **-i** inputFile.smcl **-o** outputFolder **-x** xmlConfig.xml
 
 and it generates two files: *smclClient.py* and *smclServer.py* in *outputFolder*.
 
 Run the server first without arguments.
 
 Then run the clients specifying the numeric id (relative to the xml configuration).
-		python smclClient.py *id*
+		
+python smclClient.py *id*
 
 
+###Language details
+I think that LEX and YACC syntax it's intuitive and self-explicative to understand, so the best (and updated) documentation is the source:
+- [SMCLscanner.l] (https://github.com/simoneaonzo/CSharpSMCLtoPython/blob/master/CSharpSMCLtoPython/ASTbuilder/SMCLscanner.l)
+- [SMCLparser.y] (https://github.com/simoneaonzo/CSharpSMCLtoPython/blob/master/CSharpSMCLtoPython/ASTbuilder/SMCLparser.y)
 
+
+###Criticism
+Even though this is my first experience in the world of compilers I'm not satisfied with the feature of my language and my compiler's complexity. 
+I lost much time to set up [viff] (http://viff.dk/) for the cryptographic primitives 
+that should have been used by the python generated code, 
+in the toy examples seemed the right choice, but due to the asynchronous nature
+(viff uses [twisted](https://twistedmatrix.com/)) it was a waste of time. 
+So, this project was simply an exercise to improve my programming skills 
+and understand the magic that's behind ompilers!
