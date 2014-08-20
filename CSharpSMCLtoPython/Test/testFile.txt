@@ -57,11 +57,12 @@ declare server Max:
 		sclient sc;
 		bool b = True;
 		sbool sb = False;
+		int x = 2;
 		
 		si = i;
 		sc = c;
 		sb = b;
-		i = open(si|si);
+		i = open(si+x|si);
 		c = open(sc|sc);
 		b = open(sb|sb);
 		

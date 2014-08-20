@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>C:\\Users\\Simone\\Documents\\GitHub\\CSharpSMCLtoPython\\CSharpSMCLtoPython\\Test\\testFile.txt</StartArguments>
+    <StartArguments>-i C:\\Users\\Simone\\Documents\\GitHub\\CSharpSMCLtoPython\\CSharpSMCLtoPython\\Test\\testFile.txt -o C:\\Users\\Simone\\workspace\\SMCLpy\\smcl\\ -x C:\\Users\\Simone\\Documents\\GitHub\\CSharpSMCLtoPython\\CSharpSMCLtoPython\\Test\\smcxmlconfig.xml</StartArguments>
     <StartWorkingDirectory>C:\Users\Simone\Documents\GitHub\CSharpSMCLtoPython\CSharpSMCLtoPython\bin\Debug\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup>

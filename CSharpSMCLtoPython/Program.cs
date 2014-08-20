@@ -13,22 +13,51 @@ namespace CSharpSMCLtoPython {
         {
             return
                 "Usage:\n" +
-                AppDomain.CurrentDomain.FriendlyName + " sourceFile.smcl \n" +
-                "\nIt generates two files: smclClient.py and smclServer.py";
+                AppDomain.CurrentDomain.FriendlyName + " -i inputFile.smcl -o outputFolder -x xmlConfig.xml\n" +
+                "\nIt generates two files (smclClient.py and smclServer.py) in outputFolder";
         }
 
         private static void Main(string[] args)
         {
             //Console.WriteLine(Directory.GetCurrentDirectory());
-            if (args.Length != 1)
+            if (args.Length != 6)
             {
                 Console.WriteLine(Usage());
                 Console.ReadLine();
                 return;
             }
-            string pythonSourcePath = "..\\..\\PySources\\";
-            string outputPath = "C:\\Users\\Simone\\workspace\\SMCLpy\\smcl\\";
-            FileStream stream = new FileStream(args[0], FileMode.Open);
+
+
+            const string pythonSourcePath = "..\\..\\PySources\\";
+            string xmlConfigPath = null;
+            string outputPath = null;
+            FileStream stream = null;
+
+
+            for (int i=0; i < args.Length; ++i)
+            {
+                try
+                {
+                    switch (args[i])
+                    {
+                        case "-i":
+                            stream = new FileStream(args[++i], FileMode.Open);
+                            break;
+                        case "-o":
+                            outputPath = args[++i];
+                            break;
+                        case "-x":
+                            xmlConfigPath = args[++i];
+                            break;
+                    }
+                }
+                catch (IndexOutOfRangeException ie)
+                {
+                    Console.WriteLine(ie + "\n" + Usage());
+                    Console.ReadLine();
+                    return;
+                }
+            }
 
             Console.SetWindowSize(80,62);
             var parser = new Parser(new Scanner(stream));
@@ -44,7 +73,7 @@ namespace CSharpSMCLtoPython {
                     //Console.WriteLine("TYPE-CHECKED PROG:\n\n{0}\n", toStringVisitor.Result);
 
                     var pyGen = new ToPythonVisitor(
-                        pythonSourcePath + "smcxmlconfig.xml",
+                        xmlConfigPath,
                         pythonSourcePath + "supportFileForClient.py",
                         pythonSourcePath + "mainFileForClient.py",
                         pythonSourcePath + "supportFileForServer.py",
@@ -82,6 +111,7 @@ namespace CSharpSMCLtoPython {
                     Console.WriteLine("Typechecking error:\n{0}", e.Message);
                 }
             }
+            Console.WriteLine("Press Any Key to Continue...");
             Console.ReadLine();
         }
     }
