@@ -1,6 +1,6 @@
 if __name__ == "__main__":
     if (len(sys.argv) != 2):
-        raise Exception("USAGE: ./client.py id")
+        raise Exception("USAGE: ./smclClient.py id")
     pid = int(sys.argv[1])
     if (pid < 1):
         raise Exception("id must be greater than 0")
